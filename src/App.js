@@ -1,9 +1,10 @@
 import React from 'react';
 import Navbar from './Navbar';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from './Home';
-import Products from './Products';
-import Cart from './Cart';
+import Home from './pages/Home';
+import Products from './pages/Products';
+import Cart from './pages/Cart';
+import About from './pages/About';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<Home />}/>
           <Route path="/products" element={<Products />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/about" element={<About />} />
         </Routes>
       </BrowserRouter>
     </>

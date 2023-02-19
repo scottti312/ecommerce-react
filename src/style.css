@@ -1,5 +1,15 @@
+@font-face {
+  font-family: ReallyAwesome;
+  src: url(./resources/fonts/ReallyAwesome.ttf);
+}
+
+@font-face {
+  font-family: noto-serif;
+  src: url(./resources/fonts/notoserif/NotoSerif-Regular.ttf);
+}
+
 body {
-  font-family: 'Roboto';
+  font-family: noto-serif;
   margin: 0;
   height: 100%;
 }
