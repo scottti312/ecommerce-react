@@ -20,6 +20,7 @@ const Nav = styled.div`
   justify-content: space-between;
   text-align: center;
   text-decoration: none,
+  padding: 20px;
 `;
 
 const Title = {
