@@ -7,7 +7,7 @@ const Navbar = () => {
   return (
     <NavWrapper>
       <Nav>
-        <Link to="/" style={{...LinkStyle,...Title}}>Sticker Avenue</Link>
+        <Link to="/sticker-avenue" style={{...LinkStyle,...Title}}>Sticker Avenue</Link>
         <RightNav>
           <Link to="/about" style={LinkStyle}>About</Link>
           <Link to="/products" style={LinkStyle}>Products</Link>
