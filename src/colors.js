@@ -4,4 +4,5 @@ export const COLORS = {
   product_bg: "#d8c9d5",
   scrollbar_bg: "#f0f8ff",
   addcart_bg: "#ccffcc",
+  hover_bg: "#add8e6",
 }

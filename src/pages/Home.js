@@ -9,14 +9,18 @@ const Home = () => {
     <HomeBody>
       <WelcomeWrapper>
         <WelcomeTitle>Welcome!</WelcomeTitle>
-        <WelcomeDescription>Welcome to Sticker Avenue, where stickers are our love language! We're so excited to have you here and can't wait to share our fun and colorful collection with you. Whether you're looking for something sweet and whimsical or bold and trendy, we've got you covered. So, come on in, take a look around, and let's add some personality to your world, one sticker at a time!</WelcomeDescription>
+        <WelcomeDescription>Welcome to Sticker Avenue, where stickers are our love language! We're so excited to have you here and can't wait to share our fun and colorful collection with you. So, come on in, take a look around, and let's add some personality to your world, one sticker at a time!</WelcomeDescription>
       </WelcomeWrapper>
       <ScrollingText />
       <FeaturedStickers />
       <FooterContainer>
-        <Footer>
-          Created by Scott Ti 
-        </Footer>
+        <Github href="https://github.com/scottti312/sticker-avenue">
+          <Footer>
+            Created by Scott Ti
+            <i className="fa-brands fa-github fa-xl" style={{paddingLeft: "15px"}}>
+            </i>
+          </Footer>
+        </Github>
       </FooterContainer>
     </HomeBody>
   )
@@ -33,17 +37,20 @@ const WelcomeWrapper = styled.div`
   display: flex;
   flex-direction: column;
   background-color: ${COLORS.welcome_bg};
-  padding: 5vh 15vw 5vh 15vw;
+  padding: 30px 30px 60px 5%;
 `;
 
 const WelcomeTitle = styled.h1`
-  margin: 0;
-  padding-left: 15%;
+  margin: 0 0 10px 0;
+  padding-left: 25%;
 `;
 
 const WelcomeDescription = styled.p`
-  width: 50%;
-  padding-left: 20%;
+  font-size: 1.2em;
+  min-width: 500px;
+  width: 40%;
+  padding-left: 30%;
+  line-height: 1.7em;
 `;
 
 const FooterContainer = styled.div`
@@ -53,11 +60,18 @@ const FooterContainer = styled.div`
   margin: 0 auto;
   background-color: black;
   text-align: center;
-  padding: 30px;
+  padding: 30px 0 30px 0;
 `;
 
 const Footer = styled.div`
   color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Github = styled.a`
+  text-decoration: none;
 `;
 
 export default Home;

@@ -44,6 +44,7 @@ const ScrollWrapper = styled.div`
   flex-wrap: nowrap;
   overflow: hidden;
   white-space: nowrap;
+  max-width: 100%;
 
   background-color: ${COLORS.scrollbar_bg};
   border-top: 2px solid black;
@@ -51,9 +52,9 @@ const ScrollWrapper = styled.div`
 `;
 
 const ScrollContainer = styled.div`
+  overflow: hidden;
   display: flex;
   flex-shrink: 0;
-  max-width: 100%;
   overflow: hidden;
   white-space: nowrap;
   font-size: 24px;

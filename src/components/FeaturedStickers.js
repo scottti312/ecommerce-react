@@ -1,28 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import bread from "../resources/stickers/bread.png";
-import shampoo from "../resources/stickers/shampoo.png";
-import love from "../resources/stickers/love.png";
-import bedding from "../resources/stickers/bedding.png";
-import grain from "../resources/stickers/grain.png";
-import {COLORS} from "../colors";
+import { COLORS } from "../colors";
 
 const FeaturedStickers = () => {
+  let bread = require("../resources/stickers/bread.png");
+  let love = require("../resources/stickers/love.png");
+  let bedding = require("../resources/stickers/bedding.png");
+  let grain = require("../resources/stickers/grain.png");
+  let shampoo = require("../resources/stickers/shampoo.png");
+
   return (
     <SectionContainer>
       <FeaturedTitle>Featured Stickers</FeaturedTitle>
       <FeaturedContainer>
         <FeaturedWrapper> 
-          <Product title="bread" price="$1" src={bread} alt="bread" />
-          <Product title="shampoo" price="$2" src={shampoo} alt="shampoo" />
-          <Product title="love" price="$2" src={love} alt="love" />
-          <Product title="bedding" price="$1" src={bedding} alt="bedding" />
-          <Product title="grain" price="$1" src={grain} alt="grain" />
+          <Product id="bread" title="bread" price="$1" src={bread} alt="bread" />
+          <Product id="shampoo" title="shampoo" price="$2" src={shampoo} alt="shampoo" />
+          <Product id="love" title="love" price="$2" src={love} alt="love" />
+          <Product id="bedding" title="bedding" price="$1" src={bedding} alt="bedding" />
+          <Product id="grain" title="grain" price="$1" src={grain} alt="grain" />
         </FeaturedWrapper>
       </FeaturedContainer>
       <CreditContainer>
-        <Credit href="https://www.flaticon.com/free-icons/volunteering" title="volunteering icons">
+        <Credit href="https://www.flaticon.com/free-icons/volunteering" title="Icons Credit - THANK YOU!!">
           Icons created by Freepik - Flaticon
         </Credit>
       </CreditContainer>
@@ -30,9 +31,9 @@ const FeaturedStickers = () => {
   );
 };
 
-const Product = ({ title, price, src, alt }) => {
+const Product = ({ id, title, price, src, alt }) => {
   return (
-    <Link to="/about" style={LinkStyle}>
+    <Link to={`/products/${id}`} style={LinkStyle} state={{title: title, price: price, src: src}}>
       <ProductContainer>
         <ProductWrapper>
           <ProductImage src={src} alt={alt} />
@@ -59,7 +60,8 @@ const LinkStyle = {
 };
 
 const SectionContainer = styled.div`
-  margin: 8vh;
+  width: 100%;
+  margin: 8vh 0 8vw 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -73,15 +75,20 @@ const FeaturedTitle = styled.div`
 
 const FeaturedContainer = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 `;
 
 const FeaturedWrapper = styled.div`
+  overflow: scroll;
   height: 100%;
-  width: 50%;
+  width: 100%;
+  margin: auto;
   display: flex;
+  justify-content: safe center;
   gap: 20px;
   padding: 30px;
-  margin: 0 30vw 0 30vw; 
 `;
 
 const ProductContainer = styled.div`
@@ -95,6 +102,11 @@ const ProductWrapper = styled.div`
   background-color: ${COLORS.product_bg};
   padding: 50px;
   border-radius: 20px;
+  transition: all 0.3s ease;
+  &:hover {
+    background-color: ${COLORS.hover_bg};
+    transform: scale(1.1);
+  }
 `;
 
 const ProductBottom = styled.div`
@@ -113,6 +125,11 @@ const CartContainer = styled.div`
   border-radius: 12px;
   background-color: ${COLORS.addcart_bg};
   display: flex;
+  transition: all 0.3s ease;
+  &:hover {
+    background-color: ${COLORS.hover_bg};
+    transform: scale(1.2);
+  }
 `;
 
 const AddToCart = styled.div`
