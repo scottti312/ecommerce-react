@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/sticker-avenue/static/css/main.4ac4614b.css",
-    "main.js": "/sticker-avenue/static/js/main.35b0b722.js",
+    "main.js": "/sticker-avenue/static/js/main.d93a1621.js",
     "static/media/NotoSerif-Regular.ttf": "/sticker-avenue/static/media/NotoSerif-Regular.f137c7ae4fdb27744a29.ttf",
     "static/media/ReallyAwesome.ttf": "/sticker-avenue/static/media/ReallyAwesome.5c60f4bc0fec8a15ac72.ttf",
     "static/media/grain.png": "/sticker-avenue/static/media/grain.c091780b462a9e02bddb.png",
@@ -12,10 +12,10 @@
     "static/media/test-calibre-regular.woff2": "/sticker-avenue/static/media/test-calibre-regular.8066faca44cc31cbc559.woff2",
     "index.html": "/sticker-avenue/index.html",
     "main.4ac4614b.css.map": "/sticker-avenue/static/css/main.4ac4614b.css.map",
-    "main.35b0b722.js.map": "/sticker-avenue/static/js/main.35b0b722.js.map"
+    "main.d93a1621.js.map": "/sticker-avenue/static/js/main.d93a1621.js.map"
   },
   "entrypoints": [
     "static/css/main.4ac4614b.css",
-    "static/js/main.35b0b722.js"
+    "static/js/main.d93a1621.js"
   ]
 }
