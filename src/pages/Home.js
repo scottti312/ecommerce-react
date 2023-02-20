@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import bread from "../resources/bread.png";
-import shampoo from "../resources/shampoo.png";
-import love from "../resources/love.png";
+import bread from "../resources/stickers/bread.png";
+import shampoo from "../resources/stickers/shampoo.png";
+import love from "../resources/stickers/love.png";
+import ScrollingText from "../components/ScrollingText";
 
 const Home = () => {
   return (
@@ -37,7 +38,7 @@ const Home = () => {
           Volunteering icons created by Freepik - Flaticon
         </Credit>
       </CreditContainer>
-
+      <ScrollingText />
       <FooterContainer>
         <Footer>
           Created by Scott Ti 
