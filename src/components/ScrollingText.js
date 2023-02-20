@@ -1,53 +1,34 @@
 import React from 'react';
 import styled from 'styled-components';
+import { COLORS } from '../colors';
 import { keyframes } from 'styled-components';
 
 const ScrollingText = () => {
   return (
     <ScrollWrapper>
-      <ScrollContainer>
-        <ScrollText>Here is some scrolling text!</ScrollText>
-        <ScrollText>Hello world!</ScrollText>
-        <ScrollText>Bedding</ScrollText>
-        <ScrollText>Bread</ScrollText>
-        <ScrollText>Clothes</ScrollText>
-        <ScrollText>Shampoo</ScrollText>
-        <ScrollText>Love</ScrollText>
-        <ScrollText>Couple</ScrollText>
-      </ScrollContainer>
-      <ScrollContainer>
-        <ScrollText>Here is some scrolling text!</ScrollText>
-        <ScrollText>Hello world!</ScrollText>
-        <ScrollText>Bedding</ScrollText>
-        <ScrollText>Bread</ScrollText>
-        <ScrollText>Clothes</ScrollText>
-        <ScrollText>Shampoo</ScrollText>
-        <ScrollText>Love</ScrollText>
-        <ScrollText>Couple</ScrollText>
-      </ScrollContainer>
-      <ScrollContainer>
-        <ScrollText>Here is some scrolling text!</ScrollText>
-        <ScrollText>Hello world!</ScrollText>
-        <ScrollText>Bedding</ScrollText>
-        <ScrollText>Bread</ScrollText>
-        <ScrollText>Clothes</ScrollText>
-        <ScrollText>Shampoo</ScrollText>
-        <ScrollText>Love</ScrollText>
-        <ScrollText>Couple</ScrollText>
-      </ScrollContainer>
-      <ScrollContainer>
-        <ScrollText>Here is some scrolling text!</ScrollText>
-        <ScrollText>Hello world!</ScrollText>
-        <ScrollText>Bedding</ScrollText>
-        <ScrollText>Bread</ScrollText>
-        <ScrollText>Clothes</ScrollText>
-        <ScrollText>Shampoo</ScrollText>
-        <ScrollText>Love</ScrollText>
-        <ScrollText>Couple</ScrollText>
-      </ScrollContainer>
+      <ScrollContainerComp />
+      <ScrollContainerComp />
+      <ScrollContainerComp />
+      <ScrollContainerComp />
+      <ScrollContainerComp />
     </ScrollWrapper>
   );
 };
+
+const ScrollContainerComp = () => {
+  return (
+    <ScrollContainer>
+      <ScrollText>Affordable</ScrollText>
+      <ScrollText>Cruelty-free</ScrollText>
+      <ScrollText>Compostable</ScrollText>
+      <ScrollText>Free shipping on $10+</ScrollText>
+      <ScrollText>Detailed</ScrollText>
+      <ScrollText>High Quality</ScrollText>
+      <ScrollText>Durable</ScrollText>
+      <ScrollText>New collections</ScrollText>
+    </ScrollContainer>
+  );
+}
 
 const scroll = keyframes`
   0% {
@@ -63,6 +44,10 @@ const ScrollWrapper = styled.div`
   flex-wrap: nowrap;
   overflow: hidden;
   white-space: nowrap;
+
+  background-color: ${COLORS.scrollbar_bg};
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
 `;
 
 const ScrollContainer = styled.div`
@@ -73,12 +58,12 @@ const ScrollContainer = styled.div`
   white-space: nowrap;
   font-size: 24px;
   font-weight: bold;
-  animation: ${scroll} 20s linear infinite; 
+  animation: ${scroll} 30s linear infinite; 
 `;
 
 const ScrollText = styled.div`
   display: inline-block;
-  padding-right: 60px;
+  padding-right: 6em;
 `;
 
 export default ScrollingText;

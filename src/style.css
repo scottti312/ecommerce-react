@@ -8,8 +8,14 @@
   src: url(./resources/fonts/notoserif/NotoSerif-Regular.ttf);
 }
 
+@font-face {
+  font-family: calibre;
+  src: url(./resources/fonts/Calibre/test-calibre-regular.woff2);
+}
+
 body {
-  font-family: noto-serif;
+  background-color: #faebd7;
+  /* font-family: calibre; */
   margin: 0;
   height: 100%;
 }

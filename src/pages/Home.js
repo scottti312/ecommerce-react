@@ -1,44 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
-import bread from "../resources/stickers/bread.png";
-import shampoo from "../resources/stickers/shampoo.png";
-import love from "../resources/stickers/love.png";
 import ScrollingText from "../components/ScrollingText";
+import FeaturedStickers from '../components/FeaturedStickers';
+import { COLORS } from '../colors';
 
 const Home = () => {
   return (
     <HomeBody>
       <WelcomeWrapper>
-        <h1>Welcome!</h1>
-        <p>This is my sample ecommerce storefront.</p>
+        <WelcomeTitle>Welcome!</WelcomeTitle>
+        <WelcomeDescription>Welcome to Sticker Avenue, where stickers are our love language! We're so excited to have you here and can't wait to share our fun and colorful collection with you. Whether you're looking for something sweet and whimsical or bold and trendy, we've got you covered. So, come on in, take a look around, and let's add some personality to your world, one sticker at a time!</WelcomeDescription>
       </WelcomeWrapper>
-
-      <FeaturedContainer>
-        <FeaturedWrapper>
-          <ProductWrapper>
-            <ProductImage src={bread} alt="bread" />
-            <ProductTitle>Bread</ProductTitle>
-            <ProductPrice>$1</ProductPrice>
-          </ProductWrapper>
-          <ProductWrapper>
-            <ProductImage src={shampoo} alt="shampoo" />
-            <ProductTitle>Shampoo</ProductTitle>
-            <ProductPrice>$2</ProductPrice>
-          </ProductWrapper>
-          <ProductWrapper>
-            <ProductImage src={love} alt="love" />
-            <ProductTitle>Love</ProductTitle>
-            <ProductPrice>Free!</ProductPrice>
-          </ProductWrapper>
-        </FeaturedWrapper>
-      </FeaturedContainer>
-
-      <CreditContainer>
-        <Credit href="https://www.flaticon.com/free-icons/volunteering" title="volunteering icons">
-          Volunteering icons created by Freepik - Flaticon
-        </Credit>
-      </CreditContainer>
       <ScrollingText />
+      <FeaturedStickers />
       <FooterContainer>
         <Footer>
           Created by Scott Ti 
@@ -56,57 +30,20 @@ const HomeBody = styled.div`
 `;
 
 const WelcomeWrapper = styled.div`
-  width: 100%;
-`;
-
-const FeaturedContainer = styled.div`
-  width: 100%;
-`;
-
-const FeaturedWrapper = styled.div`
-  height: 200px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 30px;
-  margin: 10%;
-  border: 2px solid black;
-`;
-
-const ProductWrapper = styled.div`
-  
   display: flex;
   flex-direction: column;
-  height: 100%;
-  text-align: center;
-  // font-family: ReallyAwesome;
+  background-color: ${COLORS.welcome_bg};
+  padding: 5vh 15vw 5vh 15vw;
 `;
 
-const ProductImage = styled.img`
-  height: 120px;
-  width: 120px;
+const WelcomeTitle = styled.h1`
+  margin: 0;
+  padding-left: 15%;
 `;
 
-const ProductTitle = styled.div`
-  margin-top: 10px;
-  margin-bottom: 5px;
-  font-size: 2em;
-`;
-
-const ProductPrice = styled.div`
-  font-size: 1.5em;
-`;
-
-const CreditContainer = styled.div`
-  margin: 0 auto;
-  text-align: center;
-`;
-
-const Credit = styled.a`
-  color: inherit;
-  &:link {
-    text-decoration: none;
-  }
+const WelcomeDescription = styled.p`
+  width: 50%;
+  padding-left: 20%;
 `;
 
 const FooterContainer = styled.div`
