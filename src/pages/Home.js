@@ -4,7 +4,7 @@ import ScrollingText from "../components/ScrollingText";
 import FeaturedStickers from '../components/FeaturedStickers';
 import { COLORS } from '../colors';
 
-const Home = () => {
+const Home = ({ addToCart }) => {
   return (
     <HomeBody>
       <WelcomeWrapper>
@@ -12,7 +12,7 @@ const Home = () => {
         <WelcomeDescription>Welcome to Sticker Avenue, where stickers are our love language! We're so excited to have you here and can't wait to share our fun and colorful collection with you. So, come on in, take a look around, and let's add some personality to your world, one sticker at a time!</WelcomeDescription>
       </WelcomeWrapper>
       <ScrollingText />
-      <FeaturedStickers />
+      <FeaturedStickers addToCart={addToCart}/>
       <FooterContainer>
         <Github href="https://github.com/scottti312/sticker-avenue">
           <Footer>
@@ -37,7 +37,7 @@ const WelcomeWrapper = styled.div`
   display: flex;
   flex-direction: column;
   background-color: ${COLORS.welcome_bg};
-  padding: 30px 30px 60px 5%;
+  padding: 130px 30px 60px 5%;
 `;
 
 const WelcomeTitle = styled.h1`
