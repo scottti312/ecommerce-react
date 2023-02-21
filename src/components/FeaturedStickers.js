@@ -3,23 +3,27 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { COLORS } from "../colors";
 
-const FeaturedStickers = () => {
-  let bread = require("../resources/stickers/bread.png");
-  let love = require("../resources/stickers/love.png");
-  let bedding = require("../resources/stickers/bedding.png");
-  let grain = require("../resources/stickers/grain.png");
-  let shampoo = require("../resources/stickers/shampoo.png");
+import Products from "../Products";
+
+const FeaturedStickers = ({ addToCart }) => {
+  // let bread = require("../resources/stickers/bread.png");
+  // let love = require("../resources/stickers/love.png");
+  // let bedding = require("../resources/stickers/bedding.png");
+  // let grain = require("../resources/stickers/grain.png");
+  // let shampoo = require("../resources/stickers/shampoo.png");
+
+  const { bread, love, bedding, grain, shampoo } = Products;
 
   return (
     <SectionContainer>
       <FeaturedTitle>Featured Stickers</FeaturedTitle>
       <FeaturedContainer>
         <FeaturedWrapper> 
-          <Product id="bread" title="bread" price="$1" src={bread} alt="bread" />
-          <Product id="shampoo" title="shampoo" price="$2" src={shampoo} alt="shampoo" />
-          <Product id="love" title="love" price="$2" src={love} alt="love" />
-          <Product id="bedding" title="bedding" price="$1" src={bedding} alt="bedding" />
-          <Product id="grain" title="grain" price="$1" src={grain} alt="grain" />
+          <Product addToCart={addToCart} product={bread}/>
+          <Product addToCart={addToCart} product={love}/>
+          <Product addToCart={addToCart} product={bedding}/>
+          <Product addToCart={addToCart} product={grain}/>
+          <Product addToCart={addToCart} product={shampoo}/>
         </FeaturedWrapper>
       </FeaturedContainer>
       <CreditContainer>
@@ -31,7 +35,39 @@ const FeaturedStickers = () => {
   );
 };
 
-const Product = ({ id, title, price, src, alt }) => {
+// const Product = ({ addToCart, id, title, price, src, alt }) => {
+//   const handleCartClick = (event) => {
+//     addToCart(event, id, title, price);
+//   };
+
+//   return (
+//     <Link to={`/products/${id}`} style={LinkStyle} state={{title: title, price: price, src: src}}>
+//       <ProductContainer>
+//         <ProductWrapper>
+//           <ProductImage src={src} alt={alt} />
+//         </ProductWrapper>
+//         <ProductBottom>
+//           <ProductInfo>
+//             <ProductTitle>{title}</ProductTitle>
+//             <ProductPrice>{price}</ProductPrice>
+//           </ProductInfo>
+//           <CartContainer onClick={handleCartClick}>
+//             <AddToCart>
+//               <i className="fa-solid fa-cart-shopping fa-lg"></i>
+//             </AddToCart>
+//           </CartContainer>
+//         </ProductBottom>
+//       </ProductContainer>
+//     </Link>
+//   );
+// };
+
+const Product = ({ addToCart, product }) => {
+  const {id, title, price, src, alt} = product;
+  const handleCartClick = (event) => {
+    addToCart(event, id, title, price);
+  };
+
   return (
     <Link to={`/products/${id}`} style={LinkStyle} state={{title: title, price: price, src: src}}>
       <ProductContainer>
@@ -41,9 +77,9 @@ const Product = ({ id, title, price, src, alt }) => {
         <ProductBottom>
           <ProductInfo>
             <ProductTitle>{title}</ProductTitle>
-            <ProductPrice>{price}</ProductPrice>
+            <ProductPrice>${price}</ProductPrice>
           </ProductInfo>
-          <CartContainer>
+          <CartContainer onClick={handleCartClick}>
             <AddToCart>
               <i className="fa-solid fa-cart-shopping fa-lg"></i>
             </AddToCart>

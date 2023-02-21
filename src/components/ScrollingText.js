@@ -20,7 +20,6 @@ const ScrollContainerComp = () => {
     <ScrollContainer>
       <ScrollText>Affordable</ScrollText>
       <ScrollText>Cruelty-free</ScrollText>
-      <ScrollText>Compostable</ScrollText>
       <ScrollText>Free shipping on $10+</ScrollText>
       <ScrollText>Detailed</ScrollText>
       <ScrollText>High Quality</ScrollText>
