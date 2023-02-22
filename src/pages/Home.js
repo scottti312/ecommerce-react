@@ -1,10 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components/macro';
 import ScrollingText from "../components/ScrollingText";
 import FeaturedStickers from '../components/FeaturedStickers';
 import { COLORS } from '../colors';
 
 const Home = ({ addToCart }) => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+      } else {
+        entry.target.classList.remove('show');
+      }
+    })
+  });
+
+  useEffect(() => {
+    const hiddenElements = document.querySelectorAll('.hidden');
+    hiddenElements.forEach((el) => observer.observe(el));
+  });
+
   return (
     <HomeBody>
       <WelcomeWrapper>
@@ -15,7 +30,7 @@ const Home = ({ addToCart }) => {
       <FeaturedStickers addToCart={addToCart}/>
       <FooterContainer>
         <Github href="https://github.com/scottti312/sticker-avenue">
-          <Footer>
+          <Footer className='hidden'>
             Created by Scott Ti
             <i className="fa-brands fa-github fa-xl" style={{paddingLeft: "15px"}}>
             </i>

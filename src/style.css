@@ -13,9 +13,26 @@
   src: url(./resources/fonts/Calibre/test-calibre-regular.woff2);
 }
 
+@font-face {
+  font-family: Bubble Rainbow;
+  src: url(./resources/fonts/Bubble\ Rainbow.ttf);
+}
+
 body {
   background-color: #faebd7;
   /* font-family: calibre; */
   margin: 0;
   height: 100%;
+}
+
+.hidden {
+  opacity: 0;
+  transform: translateY(100%);
+  transition: all 0.5s;
+}
+
+.show {
+  opacity: 1;
+  transform: translateY(0%);
+  transition: all 1s;
 }
