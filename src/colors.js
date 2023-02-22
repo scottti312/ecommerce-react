@@ -6,4 +6,5 @@ export const COLORS = {
   scrollbar_bg: "#f0f8ff",
   addcart_bg: "#ccffcc",
   hover_bg: "#add8e6",
+  delete_bg: "#fc6868",
 }

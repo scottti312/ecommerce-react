@@ -1,17 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import { COLORS } from "../colors";
 
-import Products from "../Products";
+import Products from "../util/Products";
 
 const FeaturedStickers = ({ addToCart }) => {
-  // let bread = require("../resources/stickers/bread.png");
-  // let love = require("../resources/stickers/love.png");
-  // let bedding = require("../resources/stickers/bedding.png");
-  // let grain = require("../resources/stickers/grain.png");
-  // let shampoo = require("../resources/stickers/shampoo.png");
-
   const { bread, love, bedding, grain, shampoo } = Products;
 
   return (
@@ -28,48 +22,21 @@ const FeaturedStickers = ({ addToCart }) => {
       </FeaturedContainer>
       <CreditContainer>
         <Credit href="https://www.flaticon.com/free-icons/volunteering" title="Icons Credit - THANK YOU!!">
-          Icons created by Freepik - Flaticon
+          Sticker icons created by Freepik - Flaticon
         </Credit>
       </CreditContainer>
     </SectionContainer>
   );
 };
 
-// const Product = ({ addToCart, id, title, price, src, alt }) => {
-//   const handleCartClick = (event) => {
-//     addToCart(event, id, title, price);
-//   };
-
-//   return (
-//     <Link to={`/products/${id}`} style={LinkStyle} state={{title: title, price: price, src: src}}>
-//       <ProductContainer>
-//         <ProductWrapper>
-//           <ProductImage src={src} alt={alt} />
-//         </ProductWrapper>
-//         <ProductBottom>
-//           <ProductInfo>
-//             <ProductTitle>{title}</ProductTitle>
-//             <ProductPrice>{price}</ProductPrice>
-//           </ProductInfo>
-//           <CartContainer onClick={handleCartClick}>
-//             <AddToCart>
-//               <i className="fa-solid fa-cart-shopping fa-lg"></i>
-//             </AddToCart>
-//           </CartContainer>
-//         </ProductBottom>
-//       </ProductContainer>
-//     </Link>
-//   );
-// };
-
 const Product = ({ addToCart, product }) => {
   const {id, title, price, src, alt} = product;
   const handleCartClick = (event) => {
-    addToCart(event, id, title, price);
+    addToCart(event, product);
   };
 
   return (
-    <Link to={`/products/${id}`} style={LinkStyle} state={{title: title, price: price, src: src}}>
+    <Link to={`/products/${id}`} style={LinkStyle} state={{product: product}}>
       <ProductContainer>
         <ProductWrapper>
           <ProductImage src={src} alt={alt} />
@@ -130,6 +97,7 @@ const FeaturedWrapper = styled.div`
 const ProductContainer = styled.div`
   display: flex;
   flex-direction: column;
+  user-select: none;
 `;
 
 const ProductWrapper = styled.div`
@@ -153,7 +121,6 @@ const ProductBottom = styled.div`
 `;
 
 const ProductInfo = styled.div`
-
 `;
 
 const CartContainer = styled.div`
@@ -161,15 +128,18 @@ const CartContainer = styled.div`
   border-radius: 12px;
   background-color: ${COLORS.addcart_bg};
   display: flex;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   &:hover {
     background-color: ${COLORS.hover_bg};
     transform: scale(1.2);
   }
+
+  &:hover:active {
+    transform: scale(0.8);
+  }
 `;
 
 const AddToCart = styled.div`
-
 `;
 
 const ProductImage = styled.img`
