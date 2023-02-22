@@ -47,9 +47,11 @@ const Product = ({ addToCart, product }) => {
             <ProductPrice>${price}</ProductPrice>
           </ProductInfo>
           <CartContainer onClick={handleCartClick}>
-            <AddToCart>
-              <i className="fa-solid fa-cart-shopping fa-lg"></i>
-            </AddToCart>
+            <CartWrapper>
+              <AddToCart>
+                <i className="fa-solid fa-cart-shopping fa-lg"></i>
+              </AddToCart>
+            </CartWrapper>
           </CartContainer>
         </ProductBottom>
       </ProductContainer>
@@ -97,7 +99,6 @@ const FeaturedWrapper = styled.div`
 const ProductContainer = styled.div`
   display: flex;
   flex-direction: column;
-  user-select: none;
 `;
 
 const ProductWrapper = styled.div`
@@ -124,11 +125,17 @@ const ProductInfo = styled.div`
 `;
 
 const CartContainer = styled.div`
+  display: flex;
+  z-index: 3;
+`;
+
+const CartWrapper = styled.div`
   padding: 10px;
   border-radius: 12px;
   background-color: ${COLORS.addcart_bg};
   display: flex;
   transition: all 0.2s ease;
+  z-index: 4;
   &:hover {
     background-color: ${COLORS.hover_bg};
     transform: scale(1.2);
@@ -137,6 +144,7 @@ const CartContainer = styled.div`
   &:hover:active {
     transform: scale(0.8);
   }
+
 `;
 
 const AddToCart = styled.div`
