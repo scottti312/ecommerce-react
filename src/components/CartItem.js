@@ -137,6 +137,8 @@ const DeleteButton = styled.div`
   user-select: none;
   background-color: ${COLORS.delete_bg};
   transition: all 0.2s ease;
+  cursor: pointer;
+  user-select: none;
   &:hover {
     background-color: ${COLORS.primary_bg};
   }
