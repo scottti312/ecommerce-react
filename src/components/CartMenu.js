@@ -226,6 +226,7 @@ const CheckoutButton = styled.div`
   background-color: black;
   color: white;
   cursor: pointer;
+  user-select: none;
   transition: all 0.2s ease;
 
   &:hover {
