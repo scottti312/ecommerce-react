@@ -26,7 +26,8 @@ const ProductPage = ({ handleAddToCart1 }) => {
           <CartContainer onClick={() => handleAddToCart1(product)}>
             <CartWrapper>
               <AddToCart>
-                <i className="fa-solid fa-cart-shopping fa-lg"></i>
+                {/* <i className="fa-solid fa-cart-shopping fa-lg"></i> */}
+                <div>add to cart</div>
               </AddToCart>
             </CartWrapper>
           </CartContainer>
@@ -41,6 +42,7 @@ const ProductWrapper = styled.div`
 `;
 
 const ProductInfo = styled.div`
+  align-items: center;
   margin-top: 100px;
   margin-left: 100px;
 `;
@@ -57,11 +59,11 @@ const ProductPrice = styled.div`
 `;
 
 const ProductDescription = styled.div`
-
 `;
 
 const CartContainer = styled.div`
   display: flex;
+  position: absolute;
   z-index: 3;
 `;
 
@@ -69,9 +71,10 @@ const CartWrapper = styled.div`
   padding: 10px;
   border-radius: 12px;
   background-color: ${COLORS.addcart_bg};
-  display: flex;
   transition: all 0.2s ease;
   z-index: 4;
+  cursor: pointer;
+  user-select: none;
   &:hover {
     background-color: ${COLORS.hover_bg};
     transform: scale(1.2);
