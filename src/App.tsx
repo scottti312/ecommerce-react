@@ -4,16 +4,17 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import styled from 'styled-components/macro';
 
 import Home from './pages/Home';
-import Products from './pages/Products';
 import About from './pages/About';
 import ProductPage from './pages/ProductPage';
 import CartMenu from './components/CartMenu';
 import Navbar from './components/Navbar';
 import ScrollToTop from './util/ScrollToTop';
 import CartController from './util/CartController';
+import ProductsPage from './pages/ProductsPage';
+import { Product } from './util/Products';
 
 function App() {
-  const [cart, setCart] = useState(new Map());
+  const [cart, setCart] = useState<Map<string, number>>(new Map());
   const [cartOpen, setCartOpen] = useState(false);
   const [itemAmount, setItemAmount] = useState(0)
 
@@ -27,21 +28,21 @@ function App() {
     setCartOpen(false);
   }
 
-  function handleAddToCart(event, product) {
+  function handleAddToCart(event: Event, product: Product) {
     // Stops Link from calling an onClick to product page
     // when the add to cart icon is clicked. At FeaturedStickers.js
     event.preventDefault();
     addToCart(product);
   }
 
-  function handleAddToCart1(product) {
+  function handleAddToCart1(product: Product) {
     addToCart(product);
   }
 
-  function addToCart(product) {
+  function addToCart(product: Product) {
     let productString = JSON.stringify(product);
     if (cart.has(productString)) {
-      cart.set(productString, cart.get(productString) + 1);
+      cart.set(productString, cart.get(productString)! + 1);
     } else {
       cart.set(productString, 1);
     }
@@ -59,7 +60,7 @@ function App() {
         <Navbar itemAmount={itemAmount} handleCartClick={handleCartClick}/>
         <Routes>
           <Route path="/sticker-avenue" element={<Home addToCart={handleAddToCart}/>}/>
-          <Route path="/products" element={<Products />} />
+          <Route path="/products" element={<ProductsPage />} />
           <Route path="/about" element={<About />} />
           <Route path="/products/:productId" element={<ProductPage handleAddToCart1={handleAddToCart1} />} />
         </Routes>

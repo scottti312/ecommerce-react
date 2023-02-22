@@ -2,19 +2,29 @@ import React from "react";
 import styled from "styled-components/macro";
 import { COLORS } from "../colors";
 
-const CartItem = ({ item, title, price, src, quantity, cartController }) => {
+import { Product } from "../util/Products";
+import CartController from "../util/CartController";
 
-  function handleMore(item) {
-    cartController.handleMore(item);
+interface CartItemProps {
+  product: Product;
+  quantity: number;
+  cartController: CartController;
+}
+
+const CartItem = ({ product, quantity, cartController }: CartItemProps) => {
+
+  const { src, title, price } = product;
+
+  function handleMore(product: Product) {
+    cartController.handleMore(JSON.stringify(product));
   }
 
-  function handleLess(item) {
-    // console.log(item);
-    cartController.handleLess(item);
+  function handleLess(product: Product) {
+    cartController.handleLess(JSON.stringify(product));
   }
 
-  function handleDelete(item) {
-    cartController.handleDelete(item);
+  function handleDelete(product: Product) {
+    cartController.handleDelete(JSON.stringify(product));
   }
 
   return (
@@ -27,13 +37,13 @@ const CartItem = ({ item, title, price, src, quantity, cartController }) => {
         </ItemInfo>
         <ItemQuantityContainer>
           <ItemQuantityWrapper>
-            <LessButton onClick={() => handleLess(item)}>-</LessButton>
+            <LessButton onClick={() => handleLess(product)}>-</LessButton>
             <ItemQuantity>{quantity}</ItemQuantity>
-            <MoreButton onClick={() => handleMore(item)}>+</MoreButton>
+            <MoreButton onClick={() => handleMore(product)}>+</MoreButton>
           </ItemQuantityWrapper>
-          <DeleteButton onClick={() => handleDelete(item)}>Delete</DeleteButton>
+          <DeleteButton onClick={() => handleDelete(product)}>Delete</DeleteButton>
         </ItemQuantityContainer>
-        <ItemTotal>${(() => {return (price * quantity).toFixed(2)})()}</ItemTotal>
+        <ItemTotal>${(() => {return (parseInt(price) * quantity).toFixed(2)})()}</ItemTotal>
       </ItemWrapper>
     </ItemContainer>
   );

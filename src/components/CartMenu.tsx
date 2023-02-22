@@ -3,8 +3,19 @@ import styled, { keyframes } from "styled-components/macro";
 
 import CartItem from "./CartItem";
 import { COLORS } from "../colors";
+import CartController from "../util/CartController";
 
-const CartMenu = ({ handleCartClose, cart, cartController }) => {
+interface CartMenuProps {
+  handleCartClose: () => void;
+  cart: Map<string, number>;
+  cartController: CartController;
+}
+
+interface MenuProps {
+  isOpen: boolean;
+}
+
+const CartMenu = ({ handleCartClose, cart, cartController }: CartMenuProps) => {
   const [menuOpen, setMenuOpen] = useState(true);
 
   function handleCheckout() {
@@ -16,7 +27,6 @@ const CartMenu = ({ handleCartClose, cart, cartController }) => {
   }
 
   function handleMenuClose() {
-    console.log(menuOpen);
     setMenuOpen(false);
     setTimeout(() => {
       handleCartClose();
@@ -24,7 +34,7 @@ const CartMenu = ({ handleCartClose, cart, cartController }) => {
     }, 200);
   }
 
-  return(
+  return (
     <MenuWrapper>
       <Menu isOpen={menuOpen}>
         <TopBar>
@@ -40,11 +50,12 @@ const CartMenu = ({ handleCartClose, cart, cartController }) => {
               <EmptyMessage>Your cart is empty!</EmptyMessage>
             </EmptyWrapper>
           }
-          {[...cart.keys()].map((item) => {
-            const { id, title, price, src } = JSON.parse(item);
-            const quantity = cart.get(item);
+          {[...cart.keys()].map((product) => {
+            const id = JSON.parse(product).id;
+            const productObj = JSON.parse(product);
+            const quantity = cart.get(product)!;
             return (
-              <CartItem key={id} item={item} title={title} price={price} src={src} quantity={quantity} cartController={cartController} />
+              <CartItem key={id} product={productObj} quantity={quantity} cartController={cartController} />
             );
           })}
         </ItemsWrapper>
@@ -54,8 +65,8 @@ const CartMenu = ({ handleCartClose, cart, cartController }) => {
             <Total>$
               {(() => {
                 let total = 0;
-                [...cart.keys()].forEach(item => {
-                  total += (JSON.parse(item).price * cart.get(item));
+                [...cart.keys()].forEach(product => {
+                  total += (JSON.parse(product).price * cart.get(product)!);
                 })
                 return total.toFixed(2);
               })()}
@@ -66,7 +77,7 @@ const CartMenu = ({ handleCartClose, cart, cartController }) => {
       </Menu>
       <MenuBackground isOpen={menuOpen} onClick={handleMenuClose}></MenuBackground>
     </MenuWrapper>
-  );
+  )
 }
 
 const opacityFadeIn = keyframes`
@@ -87,7 +98,7 @@ const opacityFadeOut = keyframes`
   }
 `;
 
-const MenuBackground = styled.div`
+const MenuBackground = styled.div<MenuProps>`
   position: fixed;
   width: 100%;
   height: 100%;
@@ -120,7 +131,7 @@ const slideOut = keyframes`
   }
 `;
 
-const Menu = styled.div`
+const Menu = styled.div<MenuProps>`
   background-color: ${COLORS.primary_bg};
   top: 0;
   right: 0;
@@ -161,13 +172,15 @@ const Title = styled.div`
 const ItemsWrapper = styled.div`
   overflow: scroll;
   width: 100%;
-  @keyframes moveUp { 0% {
+  @keyframes moveUp {
+    0% {
       margin-top: 181px;
     }
     100% {
       margin-top: 0px;
     }
   }
+  animation: moveUp 0.5s ease-out
 `;
 
 const EmptyWrapper = styled.div`
@@ -215,6 +228,7 @@ const TotalTitle = styled.div`
 
 const Total = styled.div`
   text-align: center;
+  font-size: 1.5em;
 `;
 
 const CheckoutButton = styled.div`

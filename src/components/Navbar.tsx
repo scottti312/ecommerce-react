@@ -3,7 +3,12 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
 import { COLORS } from '../colors';
 
-const Navbar = ({ itemAmount, handleCartClick }) => {
+interface NavbarProps{
+  itemAmount: number;
+  handleCartClick: () => void;
+}
+
+const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
   const [scrolled, setScrolled] = useState(false);
   const [hasItems, setHasItems] = useState(false);
 

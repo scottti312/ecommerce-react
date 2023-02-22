@@ -1,4 +1,4 @@
-function hashCode(string){
+function hashCode(string: string): number {
   var hash = 0;
   for (var i = 0; i < string.length; i++) {
       var code = string.charCodeAt(i);

@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
 import { COLORS } from "../colors";
 
-import Products from "../util/Products";
+import Products, { Product } from "../util/Products";
 
-const FeaturedStickers = ({ addToCart }) => {
+
+interface FeaturedStickersProps {
+  addToCart: (event: Event, product: Product) => void;
+}
+
+interface FeaturedProductProps {
+  addToCart: (event: Event, product: Product) => void;
+  product: Product;
+}
+
+const FeaturedStickers = ({ addToCart }: FeaturedStickersProps) => {
   const { bread, love, bedding, grain, shampoo } = Products;
 
   return (
@@ -13,11 +23,11 @@ const FeaturedStickers = ({ addToCart }) => {
       <FeaturedTitle>Featured Stickers</FeaturedTitle>
       <FeaturedContainer>
         <FeaturedWrapper> 
-          <Product addToCart={addToCart} product={bread}/>
-          <Product addToCart={addToCart} product={love}/>
-          <Product addToCart={addToCart} product={bedding}/>
-          <Product addToCart={addToCart} product={grain}/>
-          <Product addToCart={addToCart} product={shampoo}/>
+          <FeaturedProduct addToCart={addToCart} product={bread}/>
+          <FeaturedProduct addToCart={addToCart} product={love}/>
+          <FeaturedProduct addToCart={addToCart} product={bedding}/>
+          <FeaturedProduct addToCart={addToCart} product={grain}/>
+          <FeaturedProduct addToCart={addToCart} product={shampoo}/>
         </FeaturedWrapper>
       </FeaturedContainer>
       <CreditContainer>
@@ -29,9 +39,9 @@ const FeaturedStickers = ({ addToCart }) => {
   );
 };
 
-const Product = ({ addToCart, product }) => {
+const FeaturedProduct = ({ addToCart, product }: FeaturedProductProps) => {
   const {id, title, price, src, alt} = product;
-  const handleCartClick = (event) => {
+  const handleCartClick = (event: any) => {
     addToCart(event, product);
   };
 

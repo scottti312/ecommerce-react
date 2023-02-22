@@ -3,10 +3,15 @@ import { useParams, useLocation } from 'react-router-dom';
 import styled from 'styled-components/macro';
 
 import { COLORS } from '../colors';
+import { Product } from '../util/Products';
 
-const ProductPage = ({ handleAddToCart1 }) => {
+interface CartProp {
+  handleAddToCart1: (product: Product) => void;
+}
+
+const ProductPage = ({ handleAddToCart1 }: CartProp) => {
   const { productId } = useParams();
-  const { product } = useLocation().state;
+  const { product }: { product: Product } = useLocation().state;
   const { src, title, price } = product;
   return (
     <ProductWrapper>
@@ -15,7 +20,6 @@ const ProductPage = ({ handleAddToCart1 }) => {
         <ProductTitle>{title}</ProductTitle>
         <ProductPrice>${price}</ProductPrice>
         <ProductDescription>
-
           <ul>
             <li>Made with quality paper and compostable adhesive</li>
             <li>Water resistant</li>
@@ -26,7 +30,6 @@ const ProductPage = ({ handleAddToCart1 }) => {
           <CartContainer onClick={() => handleAddToCart1(product)}>
             <CartWrapper>
               <AddToCart>
-                {/* <i className="fa-solid fa-cart-shopping fa-lg"></i> */}
                 <div>add to cart</div>
               </AddToCart>
             </CartWrapper>
