@@ -13,6 +13,7 @@ const love = new Product(hashCode('love'), 'love', 1.50, require("../resources/s
 const bedding = new Product(hashCode('bedding'), 'bedding', 1, require("../resources/stickers/bedding.png"), 'bedding');
 const grain = new Product(hashCode('grain'), 'grain', 1, require("../resources/stickers/grain.png"), 'grain');
 const shampoo = new Product(hashCode('shampoo'), 'shampoo', 1, require("../resources/stickers/shampoo.png"), 'shampoo');
+const surprised = new Product(hashCode('surprised'), 'surprised', 2, require("../resources/stickers/surprised.png"), 'surprised');
 
 const Products = {
   bread,

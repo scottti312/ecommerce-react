@@ -8,7 +8,11 @@ const CartMenu = ({ handleCartClose, cart, cartController }) => {
   const [menuOpen, setMenuOpen] = useState(true);
 
   function handleCheckout() {
-    alert('Thanks for visiting!');
+    if (cart.size === 0) {
+      alert('Your cart is empty! Thanks for visiting still :)');
+    } else {
+      alert('Thanks for visiting!');
+    }
   }
 
   function handleMenuClose() {
@@ -30,6 +34,12 @@ const CartMenu = ({ handleCartClose, cart, cartController }) => {
           <Title>My Cart</Title>
         </TopBar>
         <ItemsWrapper>
+          {cart.size === 0 &&
+            <EmptyWrapper>
+              <EmptyImage src={require("../resources/stickers/surprised.png")} alt="surprised"></EmptyImage>
+              <EmptyMessage>Your cart is empty!</EmptyMessage>
+            </EmptyWrapper>
+          }
           {[...cart.keys()].map((item) => {
             const { id, title, price, src } = JSON.parse(item);
             const quantity = cart.get(item);
@@ -81,10 +91,10 @@ const MenuBackground = styled.div`
   position: fixed;
   width: 100%;
   height: 100%;
-  backdrop-filter: blur(1px);
+  backdrop-filter: blur(2px);
   background-color: rgba(0,0,0,0.3);
   z-index: 9;
-  animation: ${({ isOpen }) => isOpen ? opacityFadeIn : opacityFadeOut} 0.2s ease;
+  animation: ${({ isOpen }) => isOpen ? opacityFadeIn : opacityFadeOut} 0.5s ease;
 `;
 
 const MenuWrapper = styled.div`
@@ -158,6 +168,24 @@ const ItemsWrapper = styled.div`
       margin-top: 0px;
     }
   }
+`;
+
+const EmptyWrapper = styled.div`
+  padding: 20px 0 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+`;
+
+const EmptyImage = styled.img`
+  height: 100px;
+  width: 100px;
+`;
+
+const EmptyMessage = styled.div`
+  text-align: center;
+  font-size: 1.5em;
 `;
 
 const CartFinishWrapper = styled.div`
