@@ -22,12 +22,12 @@ const FeaturedStickers = ({ addToCart }: FeaturedStickersProps) => {
     <SectionContainer>
       <FeaturedTitle>Featured Stickers</FeaturedTitle>
       <FeaturedContainer>
-        <FeaturedWrapper> 
-          <FeaturedProduct addToCart={addToCart} product={bread}/>
-          <FeaturedProduct addToCart={addToCart} product={love}/>
-          <FeaturedProduct addToCart={addToCart} product={bedding}/>
-          <FeaturedProduct addToCart={addToCart} product={grain}/>
-          <FeaturedProduct addToCart={addToCart} product={shampoo}/>
+        <FeaturedWrapper>
+          <FeaturedProduct addToCart={addToCart} product={bread} />
+          <FeaturedProduct addToCart={addToCart} product={love} />
+          <FeaturedProduct addToCart={addToCart} product={bedding} />
+          <FeaturedProduct addToCart={addToCart} product={grain} />
+          <FeaturedProduct addToCart={addToCart} product={shampoo} />
         </FeaturedWrapper>
       </FeaturedContainer>
       <CreditContainer>
@@ -40,13 +40,13 @@ const FeaturedStickers = ({ addToCart }: FeaturedStickersProps) => {
 };
 
 const FeaturedProduct = ({ addToCart, product }: FeaturedProductProps) => {
-  const {id, title, price, src, alt} = product;
+  const { id, title, price, src, alt } = product;
   const handleCartClick = (event: any) => {
     addToCart(event, product);
   };
 
   return (
-    <Link to={`/products/${id}`} style={LinkStyle} state={{product: product}}>
+    <Link to={`/products/${id}`} style={LinkStyle} state={{ product: product }}>
       <ProductContainer>
         <ProductWrapper>
           <ProductImage src={src} alt={alt} />

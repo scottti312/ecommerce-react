@@ -46,7 +46,7 @@ function App() {
     } else {
       cart.set(productString, 1);
     }
-    setCart(cart); 
+    setCart(cart);
     setItemAmount(itemAmount + 1);
   }
 
@@ -57,9 +57,9 @@ function App() {
         <CartMenuWrapper className={cartOpen ? 'active' : 'inactive'}>
           <CartMenu handleCartClose={handleCartClose} cart={cart} cartController={cartController} />
         </CartMenuWrapper>
-        <Navbar itemAmount={itemAmount} handleCartClick={handleCartClick}/>
+        <Navbar itemAmount={itemAmount} handleCartClick={handleCartClick} />
         <Routes>
-          <Route path="/sticker-avenue" element={<Home addToCart={handleAddToCart}/>}/>
+          <Route path="/sticker-avenue" element={<Home addToCart={handleAddToCart} />} />
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/about" element={<About />} />
           <Route path="/products/:productId" element={<ProductPage handleAddToCart1={handleAddToCart1} />} />

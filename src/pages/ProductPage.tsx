@@ -27,13 +27,13 @@ const ProductPage = ({ handleAddToCart1 }: CartProp) => {
             <li>2" x 2"</li>
           </ul>
         </ProductDescription>
-          <CartContainer onClick={() => handleAddToCart1(product)}>
-            <CartWrapper>
-              <AddToCart>
-                <div>add to cart</div>
-              </AddToCart>
-            </CartWrapper>
-          </CartContainer>
+        <CartContainer onClick={() => handleAddToCart1(product)}>
+          <CartWrapper>
+            <AddToCart>
+              <div>add to cart</div>
+            </AddToCart>
+          </CartWrapper>
+        </CartContainer>
       </ProductInfo>
     </ProductWrapper>
   );

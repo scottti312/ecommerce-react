@@ -38,7 +38,7 @@ const Home = ({ addToCart }: HomeProps) => {
         <Github href="https://github.com/scottti312/sticker-avenue">
           <Footer className='hidden'>
             Created by Scott Ti
-            <i className="fa-brands fa-github fa-xl" style={{paddingLeft: "15px"}}>
+            <i className="fa-brands fa-github fa-xl" style={{ paddingLeft: "15px" }}>
             </i>
           </Footer>
         </Github>

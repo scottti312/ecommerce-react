@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
 import { COLORS } from '../colors';
 
-interface NavbarProps{
+interface NavbarProps {
   itemAmount: number;
   handleCartClick: () => void;
 }
@@ -32,26 +32,26 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
       setHasItems(false);
     }
   }, [itemAmount]);
-  
+
   const navbarClass = scrolled ? 'scrolled' : '';
 
   return (
-      <NavWrapper className={navbarClass}>
-        <Nav>
-          <Link to="/sticker-avenue" style={{...LinkStyle,...Title}}>Sticker Avenue</Link>
-          <RightNav>
-            <Link to="/about" style={LinkStyle}>About</Link>
-            <Link to="/products" style={LinkStyle}>Products</Link>
-            <CartButtonWrapper onClick={handleCartClick}>
-              <CartButton>Cart</CartButton>
-              <ItemsIndicatorWrapper className={hasItems ? 'active' : 'inactive'}>
-                <ItemsIndicator>{itemAmount}</ItemsIndicator>
-              </ItemsIndicatorWrapper>
-            </CartButtonWrapper>
-          </RightNav>
-        </Nav>
+    <NavWrapper className={navbarClass}>
+      <Nav>
+        <Link to="/sticker-avenue" style={{ ...LinkStyle, ...Title }}>Sticker Avenue</Link>
+        <RightNav>
+          <Link to="/about" style={LinkStyle}>About</Link>
+          <Link to="/products" style={LinkStyle}>Products</Link>
+          <CartButtonWrapper onClick={handleCartClick}>
+            <CartButton>Cart</CartButton>
+            <ItemsIndicatorWrapper className={hasItems ? 'active' : 'inactive'}>
+              <ItemsIndicator>{itemAmount}</ItemsIndicator>
+            </ItemsIndicatorWrapper>
+          </CartButtonWrapper>
+        </RightNav>
+      </Nav>
 
-      </NavWrapper>
+    </NavWrapper>
   );
 };
 

@@ -43,7 +43,7 @@ const CartItem = ({ product, quantity, cartController }: CartItemProps) => {
           </ItemQuantityWrapper>
           <DeleteButton onClick={() => handleDelete(product)}>Delete</DeleteButton>
         </ItemQuantityContainer>
-        <ItemTotal>${(() => {return (parseInt(price) * quantity).toFixed(2)})()}</ItemTotal>
+        <ItemTotal>${(() => { return (parseInt(price) * quantity).toFixed(2) })()}</ItemTotal>
       </ItemWrapper>
     </ItemContainer>
   );
