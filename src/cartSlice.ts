@@ -2,7 +2,6 @@ import { enableMapSet } from "immer";
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { Product } from "./util/Products";
-import ProductPage from "./pages/ProductPage";
 
 enableMapSet();
 
