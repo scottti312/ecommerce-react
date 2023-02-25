@@ -3,28 +3,30 @@ import styled from "styled-components/macro";
 import { COLORS } from "../colors";
 
 import { Product } from "../util/Products";
-import CartController from "../util/CartController";
+
+import { useDispatch } from 'react-redux';
+import { addToCart, deleteFromCart, removeFromCart } from "../cartSlice";
 
 interface CartItemProps {
   product: Product;
   quantity: number;
-  cartController: CartController;
 }
 
-const CartItem = ({ product, quantity, cartController }: CartItemProps) => {
+const CartItem = ({ product, quantity }: CartItemProps) => {
+  const dispatch = useDispatch();
 
   const { src, title, price } = product;
 
   function handleMore(product: Product) {
-    cartController.handleMore(JSON.stringify(product));
+    dispatch(addToCart(product));
   }
 
   function handleLess(product: Product) {
-    cartController.handleLess(JSON.stringify(product));
+    dispatch(removeFromCart(product));
   }
 
   function handleDelete(product: Product) {
-    cartController.handleDelete(JSON.stringify(product));
+    dispatch(deleteFromCart(product));
   }
 
   return (

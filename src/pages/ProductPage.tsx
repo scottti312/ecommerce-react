@@ -6,10 +6,10 @@ import { COLORS } from '../colors';
 import { Product } from '../util/Products';
 
 interface CartProp {
-  handleAddToCart1: (product: Product) => void;
+  addToCart: (product: Product) => void;
 }
 
-const ProductPage = ({ handleAddToCart1 }: CartProp) => {
+const ProductPage = ({ addToCart }: CartProp) => {
   const { productId } = useParams();
   const { product }: { product: Product } = useLocation().state;
   const { src, title, price } = product;
@@ -27,7 +27,7 @@ const ProductPage = ({ handleAddToCart1 }: CartProp) => {
             <li>2" x 2"</li>
           </ul>
         </ProductDescription>
-        <CartContainer onClick={() => handleAddToCart1(product)}>
+        <CartContainer onClick={() => addToCart(product)}>
           <CartWrapper>
             <AddToCart>
               <div>add to cart</div>

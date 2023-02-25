@@ -6,11 +6,7 @@ import { COLORS } from '../colors';
 
 import { Product } from '../util/Products';
 
-interface HomeProps {
-  addToCart: (event: Event, product: Product) => void;
-}
-
-const Home = ({ addToCart }: HomeProps) => {
+const Home = () => {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
@@ -33,7 +29,7 @@ const Home = ({ addToCart }: HomeProps) => {
         <WelcomeDescription>Welcome to Sticker Avenue, where stickers are our love language! We're so excited to have you here and can't wait to share our fun and colorful collection with you. So, come on in, take a look around, and let's add some personality to your world, one sticker at a time!</WelcomeDescription>
       </WelcomeWrapper>
       <ScrollingText />
-      <FeaturedStickers addToCart={addToCart} />
+      <FeaturedStickers />
       <FooterContainer>
         <Github href="https://github.com/scottti312/sticker-avenue">
           <Footer className='hidden'>

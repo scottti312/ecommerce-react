@@ -5,17 +5,15 @@ import { COLORS } from "../colors";
 
 import Products, { Product } from "../util/Products";
 
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../cartSlice';
 
-interface FeaturedStickersProps {
-  addToCart: (event: Event, product: Product) => void;
-}
 
 interface FeaturedProductProps {
-  addToCart: (event: Event, product: Product) => void;
   product: Product;
 }
 
-const FeaturedStickers = ({ addToCart }: FeaturedStickersProps) => {
+const FeaturedStickers = () => {
   const { bread, love, bedding, grain, shampoo } = Products;
 
   return (
@@ -23,11 +21,11 @@ const FeaturedStickers = ({ addToCart }: FeaturedStickersProps) => {
       <FeaturedTitle>Featured Stickers</FeaturedTitle>
       <FeaturedContainer>
         <FeaturedWrapper>
-          <FeaturedProduct addToCart={addToCart} product={bread} />
-          <FeaturedProduct addToCart={addToCart} product={love} />
-          <FeaturedProduct addToCart={addToCart} product={bedding} />
-          <FeaturedProduct addToCart={addToCart} product={grain} />
-          <FeaturedProduct addToCart={addToCart} product={shampoo} />
+          <FeaturedProduct product={bread} />
+          <FeaturedProduct product={love} />
+          <FeaturedProduct product={bedding} />
+          <FeaturedProduct product={grain} />
+          <FeaturedProduct product={shampoo} />
         </FeaturedWrapper>
       </FeaturedContainer>
       <CreditContainer>
@@ -39,10 +37,12 @@ const FeaturedStickers = ({ addToCart }: FeaturedStickersProps) => {
   );
 };
 
-const FeaturedProduct = ({ addToCart, product }: FeaturedProductProps) => {
+const FeaturedProduct = ({ product }: FeaturedProductProps) => {
   const { id, title, price, src, alt } = product;
+  const dispatch = useDispatch();
   const handleCartClick = (event: any) => {
-    addToCart(event, product);
+    event.preventDefault();
+    dispatch(addToCart(product));
   };
 
   return (

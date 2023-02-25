@@ -3,23 +3,24 @@ import styled, { keyframes } from "styled-components/macro";
 
 import CartItem from "./CartItem";
 import { COLORS } from "../colors";
-import CartController from "../util/CartController";
+
+import type { RootState } from '../store';
+import { useSelector } from "react-redux";
 
 interface CartMenuProps {
   handleCartClose: () => void;
-  cart: Map<string, number>;
-  cartController: CartController;
 }
 
 interface MenuProps {
   isOpen: boolean;
 }
 
-const CartMenu = ({ handleCartClose, cart, cartController }: CartMenuProps) => {
+const CartMenu = ({ handleCartClose }: CartMenuProps) => {
   const [menuOpen, setMenuOpen] = useState(true);
+  const cart = useSelector((state: RootState) => state.cart.cart);
 
   function handleCheckout() {
-    if (cart.size === 0) {
+    if (cart.length === 0) {
       alert('Your cart is empty! Thanks for visiting still :)');
     } else {
       alert('Thanks for visiting!');
@@ -44,18 +45,18 @@ const CartMenu = ({ handleCartClose, cart, cartController }: CartMenuProps) => {
           <Title>My Cart</Title>
         </TopBar>
         <ItemsWrapper>
-          {cart.size === 0 &&
+          {cart.length === 0 &&
             <EmptyWrapper>
               <EmptyImage src={require("../resources/stickers/surprised.png")} alt="surprised"></EmptyImage>
               <EmptyMessage>Your cart is empty!</EmptyMessage>
             </EmptyWrapper>
           }
-          {[...cart.keys()].map((product) => {
-            const id = JSON.parse(product).id;
-            const productObj = JSON.parse(product);
-            const quantity = cart.get(product)!;
+          {[...cart].map((item) => {
+            const id = item.product.id;
+            const productObj = item.product;
+            const quantity = item.quantity;
             return (
-              <CartItem key={id} product={productObj} quantity={quantity} cartController={cartController} />
+              <CartItem key={id} product={productObj} quantity={quantity} />
             );
           })}
         </ItemsWrapper>
@@ -65,8 +66,8 @@ const CartMenu = ({ handleCartClose, cart, cartController }: CartMenuProps) => {
             <Total>$
               {(() => {
                 let total = 0;
-                [...cart.keys()].forEach(product => {
-                  total += (JSON.parse(product).price * cart.get(product)!);
+                [...cart].forEach(item => {
+                  total += (parseFloat(item.product.price) * item.quantity);
                 })
                 return total.toFixed(2);
               })()}
