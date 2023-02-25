@@ -4,7 +4,7 @@ import ScrollingText from "../components/ScrollingText";
 import FeaturedStickers from '../components/FeaturedStickers';
 import { COLORS } from '../colors';
 
-import { Product } from '../util/Products';
+import Welcome from '../components/Welcome';
 
 const Home = () => {
   const observer = new IntersectionObserver((entries) => {
@@ -25,8 +25,8 @@ const Home = () => {
   return (
     <HomeBody>
       <WelcomeWrapper>
-        <WelcomeTitle>Welcome!</WelcomeTitle>
-        <WelcomeDescription>Welcome to Sticker Avenue, where stickers are our love language! We're so excited to have you here and can't wait to share our fun and colorful collection with you. So, come on in, take a look around, and let's add some personality to your world, one sticker at a time!</WelcomeDescription>
+        <Welcome />
+        <WelcomeDescription>to Sticker Avenue, where stickers are our love language! We're so excited to have you here and can't wait to share our fun and colorful collection with you. So, come on in, take a look around, and let's add some personality to your world, one sticker at a time!</WelcomeDescription>
       </WelcomeWrapper>
       <ScrollingText />
       <FeaturedStickers />
@@ -55,11 +55,6 @@ const WelcomeWrapper = styled.div`
   flex-direction: column;
   background-color: ${COLORS.welcome_bg};
   padding: 130px 30px 60px 5%;
-`;
-
-const WelcomeTitle = styled.h1`
-  margin: 0 0 10px 0;
-  padding-left: 25%;
 `;
 
 const WelcomeDescription = styled.p`
