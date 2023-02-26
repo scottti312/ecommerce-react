@@ -4,5 +4,6 @@ My work in progress ecommerce website. Visit the deployed site here: https://sco
 ## Technologies
  - React
  - React Router
+ - Redux
  - Typescript
  - [styled-components](https://styled-components.com/)
