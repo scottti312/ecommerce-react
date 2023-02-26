@@ -3,17 +3,16 @@ import { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import styled from 'styled-components/macro';
 
-import Home from './pages/Home';
-import About from './pages/About';
-import ProductPage from './pages/ProductPage';
+import Home from './components/Home/Home';
+import About from './components/About/About';
+import ProductPage from './components/ProductPage/ProductPage';
 import CartMenu from './components/CartMenu';
 import Navbar from './components/Navbar';
 import ScrollToTop from './util/ScrollToTop';
-import ProductsPage from './pages/ProductsPage';
+import ProductsPage from './components/ProductsPage/ProductsPage';
 import { Product } from './util/Products';
 
 import { addToCart } from './cartSlice';
-
 import type { RootState } from './store';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -46,7 +45,7 @@ function App() {
           <Route path="/sticker-avenue" element={<Home />} />
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/about" element={<About />} />
-          <Route path="/products/:productId" element={<ProductPage addToCart={handleAddToCart} />} />
+          <Route path="/products/:productTitle" element={<ProductPage addToCart={handleAddToCart} />} />
         </Routes>
       </BrowserRouter>
     </>
