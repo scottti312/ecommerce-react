@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components/macro';
-import ScrollingText from "../components/ScrollingText";
-import FeaturedStickers from '../components/FeaturedStickers';
-import { COLORS } from '../colors';
+import ScrollingText from "./ScrollingText";
+import FeaturedStickers from './FeaturedStickers';
+import { COLORS } from '../../colors';
 
-import Welcome from '../components/Welcome';
+import Welcome from './Welcome';
 
 const Home = () => {
   const observer = new IntersectionObserver((entries) => {

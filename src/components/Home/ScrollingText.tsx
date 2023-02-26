@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/macro';
-import { COLORS } from '../colors';
+import { COLORS } from '../../colors';
 import { keyframes } from 'styled-components/macro';
 
 const ScrollingText = () => {
