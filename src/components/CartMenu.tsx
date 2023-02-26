@@ -47,7 +47,7 @@ const CartMenu = ({ handleCartClose }: CartMenuProps) => {
         <ItemsWrapper>
           {cart.length === 0 &&
             <EmptyWrapper>
-              <EmptyImage src={require("../resources/stickers/surprised.png")} alt="surprised"></EmptyImage>
+              <EmptyImage src={require("../resources/stickers/food/pineapple.png")} alt="pineapple"></EmptyImage>
               <EmptyMessage>Your cart is empty!</EmptyMessage>
             </EmptyWrapper>
           }
