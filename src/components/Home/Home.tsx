@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { MutableRefObject, useEffect, useRef } from 'react';
 import styled from 'styled-components/macro';
 import ScrollingText from "./ScrollingText";
 import FeaturedStickers from './FeaturedStickers';
 import { COLORS } from '../../colors';
 
 import Welcome from './Welcome';
+import handleSubmit from './handleFirestoretest';
 
 const Home = () => {
   const observer = new IntersectionObserver((entries) => {
@@ -17,6 +18,16 @@ const Home = () => {
     })
   });
 
+  const dataRef = useRef<HTMLInputElement>(null);
+
+  const submithandler = (e: any) => {
+    e.preventDefault();
+    if (dataRef.current) {
+      handleSubmit(dataRef.current.value);
+      dataRef.current.value = "";
+    }
+  }
+
   useEffect(() => {
     const hiddenElements = document.querySelectorAll('.hidden');
     hiddenElements.forEach((el) => observer.observe(el));
@@ -28,6 +39,10 @@ const Home = () => {
         <Welcome />
         <WelcomeDescription>to Sticker Avenue, where stickers are our love language! We're so excited to have you here and can't wait to share our fun and colorful collection with you. So, come on in, take a look around, and let's add some personality to your world, one sticker at a time!</WelcomeDescription>
       </WelcomeWrapper>
+      <form onSubmit={submithandler}>
+        <input type="text" ref={dataRef} />
+        <button type="submit">Save</button>
+      </form>
       <ScrollingText />
       <FeaturedStickers />
       <FooterContainer>

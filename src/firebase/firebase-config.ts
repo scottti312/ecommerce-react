@@ -1,4 +1,6 @@
 import { firebaseConfig } from "./firebase-credentials";
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "@firebase/firestore";
 
 export function getFirebaseConfig() {
   if (!firebaseConfig || !firebaseConfig.apiKey) {
@@ -7,3 +9,6 @@ export function getFirebaseConfig() {
     return firebaseConfig;
   }
 }
+
+const app = initializeApp(firebaseConfig);
+export const firestore = getFirestore(app);
