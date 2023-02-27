@@ -1,4 +1,4 @@
-import React, { MutableRefObject, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components/macro';
 import ScrollingText from "./ScrollingText";
 import FeaturedStickers from './FeaturedStickers';
