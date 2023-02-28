@@ -7,3 +7,4 @@ My work in progress ecommerce website. Visit the deployed site here: https://sco
  - Redux
  - Typescript
  - [styled-components](https://styled-components.com/)
+ - Firebase Auth/Firestore
