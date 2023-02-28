@@ -2,6 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
 import { COLORS } from '../colors';
+import {
+  getAuth,
+  onAuthStateChanged,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut
+} from 'firebase/auth';
 
 interface NavbarProps {
   itemAmount: number;
@@ -11,6 +18,7 @@ interface NavbarProps {
 const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
   const [scrolled, setScrolled] = useState(false);
   const [hasItems, setHasItems] = useState(false);
+  const [signedIn, setSignedIn] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,6 +41,22 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
     }
   }, [itemAmount]);
 
+  async function handleSignIn() {
+    var provider = new GoogleAuthProvider();
+    await signInWithPopup(getAuth(), provider);
+    setSignedIn(true);
+  };
+
+  async function handleSignOut() {
+    await signOut(getAuth());
+    setSignedIn(false);
+  };
+
+  function isUserSignedIn() {
+    return !!getAuth().currentUser;
+  }
+
+  console.log(isUserSignedIn());
   const navbarClass = scrolled ? 'scrolled' : '';
 
   return (
@@ -48,6 +72,15 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
               <ItemsIndicator>{itemAmount}</ItemsIndicator>
             </ItemsIndicatorWrapper>
           </CartButtonWrapper>
+          {isUserSignedIn() &&
+            <UserSection>
+              <GreetUser>Hi, {getAuth().currentUser?.displayName?.split(' ')[0]}!</GreetUser>
+              <SignOutButton onClick={handleSignOut}>Sign out</SignOutButton>
+            </UserSection>
+          }
+          {!isUserSignedIn() &&
+            <SignInButton onClick={handleSignIn}>Sign In</SignInButton>
+          }
         </RightNav>
       </Nav>
 
@@ -86,6 +119,7 @@ const Title = {
 const RightNav = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 5vw;
 `;
 
@@ -132,5 +166,24 @@ const CartButton = styled.div`
   cursor: pointer;
 `;
 
+const UserSection = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const GreetUser = styled.div`
+  font-size: 1em;
+  
+`;
+
+const SignInButton = styled.div`
+  font-size: 1.4em;
+  cursor: pointer;
+`;
+
+const SignOutButton = styled.div`
+  font-size: 1em;
+  cursor: pointer;
+`;
 
 export default Navbar;
