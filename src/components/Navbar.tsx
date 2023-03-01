@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
 import { COLORS } from '../colors';
 import {
-  getAuth,
   onAuthStateChanged,
   GoogleAuthProvider,
   signInWithPopup,
@@ -18,6 +17,8 @@ import {
   getDoc,
   DocumentReference,
 } from 'firebase/firestore';
+
+import { auth, firestore } from '../firebase/firebase-config';
 
 import { useDispatch } from 'react-redux';
 
@@ -60,7 +61,6 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
   }, [itemAmount]);
 
   useEffect(() => {
-    const auth = getAuth();
     onAuthStateChanged(auth, user => {
       if (user) {
         setSignedIn(true);
@@ -73,7 +73,7 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
 
   async function handleSignIn() {
     var provider = new GoogleAuthProvider();
-    await signInWithPopup(getAuth(), provider);
+    await signInWithPopup(auth, provider);
     // if (cartExists) {
     //   loadCart
     // } else {
@@ -83,7 +83,7 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
   };
 
   async function getCart() {
-    const userName = getAuth().currentUser?.displayName;
+    const userName = auth.currentUser?.displayName;
     let docRef: DocumentReference | undefined;
     if (userName)
       docRef = doc(getFirestore(), 'users', userName);
@@ -104,7 +104,7 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
 
   async function sendCart() {
     const usersRef = collection(getFirestore(), 'users');
-    const userName = getAuth().currentUser?.displayName;
+    const userName = auth.currentUser?.displayName;
     if (userName) {
       await setDoc(doc(usersRef, userName), {
         name: userName,
@@ -114,12 +114,12 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
   };
 
   async function handleSignOut() {
-    await signOut(getAuth());
+    await signOut(auth);
     setSignedIn(false);
   };
 
   function isUserSignedIn() {
-    return !!getAuth().currentUser;
+    return auth.currentUser;
   }
 
   const navbarClass = scrolled ? 'scrolled' : '';
@@ -141,7 +141,7 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
           </CartButtonWrapper>
           {isUserSignedIn() &&
             <UserSection>
-              <GreetUser>Hi, {getAuth().currentUser?.displayName?.split(' ')[0]}!</GreetUser>
+              <GreetUser>Hi, {auth.currentUser?.displayName?.split(' ')[0]}!</GreetUser>
               <SignOutButton onClick={handleSignOut}>Sign out</SignOutButton>
             </UserSection>
           }

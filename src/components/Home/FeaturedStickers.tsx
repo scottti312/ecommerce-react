@@ -49,22 +49,29 @@ const FeaturedTitle = styled.div`
 
 const FeaturedContainer = styled.div`
   display: flex;
-  align-items: center;
+  width: 65%;
+  height: 100%;
   justify-content: center;
-  width: 100%;
+  align-items: center;
+  padding: 10px;
 `;
 
 const FeaturedWrapper = styled.div`
-  overflow: scroll;
-  height: 100%;
-  width: 100%;
-  margin: auto;
-  display: flex;
-  justify-content: safe center;
-  gap: 20px;
-  padding: 30px;
-`;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
 
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 30px;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
 
 
 const CreditContainer = styled.div`
