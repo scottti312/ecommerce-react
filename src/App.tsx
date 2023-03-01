@@ -42,7 +42,7 @@ function App() {
         </CartMenuWrapper>
         <Navbar itemAmount={itemAmount} handleCartClick={handleCartClick} />
         <Routes>
-          <Route path="/sticker-avenue" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/about" element={<About />} />
           <Route path="/products/:productTitle" element={<ProductPage addToCart={handleAddToCart} />} />
