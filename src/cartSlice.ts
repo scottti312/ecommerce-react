@@ -61,11 +61,17 @@ export const cartSlice = createSlice({
         state.itemAmount -= cart[index].quantity;
         cart.splice(index, 1);
       }
-
+    },
+    loadCart: (state, action: PayloadAction<ProductInCart[]>) => {
+      const loadedCart = action.payload;
+      state.cart = loadedCart;
+      let totalQuantity = 0;
+      loadedCart.forEach(product => totalQuantity += product.quantity)
+      state.itemAmount = totalQuantity;
     },
   }
 
 })
 
-export const { addToCart, removeFromCart, deleteFromCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, deleteFromCart, loadCart } = cartSlice.actions;
 export default cartSlice.reducer;

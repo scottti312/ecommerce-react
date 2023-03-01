@@ -10,6 +10,21 @@ import {
   signOut
 } from 'firebase/auth';
 
+import {
+  getFirestore,
+  collection,
+  setDoc,
+  doc,
+  getDoc,
+  DocumentReference,
+} from 'firebase/firestore';
+
+import { useDispatch } from 'react-redux';
+
+import { loadCart } from '../cartSlice';
+import { useSelector } from "react-redux";
+import { RootState } from '../store';
+
 interface NavbarProps {
   itemAmount: number;
   handleCartClick: () => void;
@@ -19,6 +34,9 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
   const [scrolled, setScrolled] = useState(false);
   const [hasItems, setHasItems] = useState(false);
   const [signedIn, setSignedIn] = useState(false);
+
+  const dispatch = useDispatch();
+  const cart = useSelector((state: RootState) => state.cart.cart);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,7 +74,43 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
   async function handleSignIn() {
     var provider = new GoogleAuthProvider();
     await signInWithPopup(getAuth(), provider);
+    // if (cartExists) {
+    //   loadCart
+    // } else {
+    const docRef = doc(getFirestore(), "users", "Scott Ti");
+    const docSnap = await getDoc(docRef);
     setSignedIn(true);
+  };
+
+  async function getCart() {
+    const userName = getAuth().currentUser?.displayName;
+    let docRef: DocumentReference | undefined;
+    if (userName)
+      docRef = doc(getFirestore(), 'users', userName);
+    if (docRef) {
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        console.log(docSnap.data().cart);
+        const loadedCart = docSnap.data().cart;
+        dispatch(loadCart(loadedCart))
+        console.log(cart);
+
+      } else {
+        console.log('No such document');
+      }
+    }
+
+  };
+
+  async function sendCart() {
+    const usersRef = collection(getFirestore(), 'users');
+    const userName = getAuth().currentUser?.displayName;
+    if (userName) {
+      await setDoc(doc(usersRef, userName), {
+        name: userName,
+        cart: cart,
+      });
+    }
   };
 
   async function handleSignOut() {
@@ -68,7 +122,6 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
     return !!getAuth().currentUser;
   }
 
-  console.log(isUserSignedIn());
   const navbarClass = scrolled ? 'scrolled' : '';
 
   return (
@@ -76,6 +129,8 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
       <Nav>
         <Link to="/" style={{ ...LinkStyle, ...Title }}>Sticker Avenue</Link>
         <RightNav>
+          <button onClick={sendCart}>Save Cart</button>
+          <button onClick={getCart}>Load Cart</button>
           <Link to="/about" style={LinkStyle}>About</Link>
           <Link to="/products" style={LinkStyle}>Products</Link>
           <CartButtonWrapper onClick={handleCartClick}>
