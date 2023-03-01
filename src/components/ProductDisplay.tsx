@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import styled from "styled-components/macro";
+import styled, { keyframes } from "styled-components/macro";
 import { addToCart } from "../cartSlice";
 import { COLORS } from "../colors";
 import { Product } from "../util/Products";
@@ -41,6 +41,7 @@ const ProductDisplay = ({ product }: FeaturedProductProps) => {
   );
 };
 
+
 const LinkStyle = {
   textDecoration: "none",
   color: "inherit",
@@ -52,6 +53,17 @@ const ProductContainer = styled.div`
   flex-direction: column;
 `;
 
+const rotateOnY = keyframes`
+  to {
+    transform: rotateY(360deg);
+  }
+`;
+
+const ProductImage = styled.img`
+  height: 100%;
+  width: 100%;
+`;
+
 const ProductWrapper = styled.div`
   display: flex;
   height: 120px;
@@ -60,9 +72,14 @@ const ProductWrapper = styled.div`
   padding: 50px;
   border-radius: 20px;
   transition: all 0.3s ease;
+  perspective: 240px;
   &:hover {
     background-color: ${COLORS.hover_bg};
     transform: scale(1.1);
+  }
+  &:hover ${ProductImage} {
+
+    animation: ${rotateOnY} 4s infinite linear;
   }
 `;
 
@@ -96,19 +113,10 @@ const CartWrapper = styled.div`
   &:hover:active {
     transform: scale(0.8);
   }
-
 `;
 
 const AddToCart = styled.div`
 `;
-
-const ProductImage = styled.img`
-  /* height: 120px;
-  width: 120px; */
-  height: 100%;
-  width: 100%;
-`;
-
 const ProductTitle = styled.div`
   margin-top: 10px;
   margin-bottom: 5px;

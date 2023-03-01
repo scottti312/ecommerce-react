@@ -7,6 +7,8 @@ import { COLORS } from "../colors";
 import type { RootState } from '../store';
 import { useSelector } from "react-redux";
 
+import { getAuth } from "firebase/auth";
+
 interface CartMenuProps {
   handleCartClose: () => void;
 }
@@ -23,7 +25,11 @@ const CartMenu = ({ handleCartClose }: CartMenuProps) => {
     if (cart.length === 0) {
       alert('Your cart is empty! Thanks for visiting still :)');
     } else {
-      alert('Thanks for visiting!');
+      if (getAuth().currentUser) {
+        alert(`Thanks for visiting ${getAuth().currentUser?.displayName?.split(' ')[0]}!`);
+      } else {
+        alert(`Thanks for visiting!`)
+      }
     }
   }
 

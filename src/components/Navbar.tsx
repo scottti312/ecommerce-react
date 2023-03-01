@@ -41,6 +41,18 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
     }
   }, [itemAmount]);
 
+  useEffect(() => {
+    const auth = getAuth();
+    onAuthStateChanged(auth, user => {
+      if (user) {
+        setSignedIn(true);
+      } else {
+        setSignedIn(false);
+      }
+    });
+  }, []);
+
+
   async function handleSignIn() {
     var provider = new GoogleAuthProvider();
     await signInWithPopup(getAuth(), provider);

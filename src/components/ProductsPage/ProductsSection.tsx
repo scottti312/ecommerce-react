@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 import Products, { Product } from "../../util/Products";
 import ProductDisplay from '../ProductDisplay';
@@ -40,8 +40,11 @@ const ProductsSection = ({ selected }: ProductsSectionProps) => {
 const ProductsContainer = styled.div`
   display: grid;
   justify-content: center;
-  grid-template-columns: repeat(3, 340px);
-  gap: 10px;
+  /* grid-template-columns: repeat(auto-fit, 1fr); */
+  grid-template-columns: repeat(3, minmax(186px, 1fr));
+  /* grid-template-columns: repeat(3, 200px); */
+  gap: 5px;
+  width: 100%;
 `;
 
 const ProductWrapper = styled.div`
