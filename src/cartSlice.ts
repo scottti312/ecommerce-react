@@ -1,11 +1,8 @@
-import { enableMapSet } from "immer";
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { Product } from "./util/Products";
 
-enableMapSet();
-
-interface ProductInCart {
+export interface ProductInCart {
   product: Product;
   quantity: number;
 }
@@ -63,6 +60,7 @@ export const cartSlice = createSlice({
       }
     },
     loadCart: (state, action: PayloadAction<ProductInCart[]>) => {
+      console.log('test');
       const loadedCart = action.payload;
       state.cart = loadedCart;
       let totalQuantity = 0;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import styled from 'styled-components/macro';
@@ -7,7 +7,7 @@ import Home from './components/Home/Home';
 import About from './components/About/About';
 import ProductPage from './components/ProductPage/ProductPage';
 import CartMenu from './components/CartMenu';
-import Navbar from './components/Navbar';
+import Navbar from './components/Navbar/Navbar';
 import ScrollToTop from './util/ScrollToTop';
 import ProductsPage from './components/ProductsPage/ProductsPage';
 import { Product } from './util/Products';
@@ -15,11 +15,31 @@ import { Product } from './util/Products';
 import { addToCart } from './cartSlice';
 import type { RootState } from './store';
 import { useSelector, useDispatch } from 'react-redux';
+import { auth} from './firebase/firebase-config';
+import { loadCart } from './cartSlice';
+import { getCart, sendCart } from './firestore';
 
 function App() {
   const [cartOpen, setCartOpen] = useState(false);
   const dispatch = useDispatch();
   const itemAmount = useSelector((state: RootState) => state.cart.itemAmount);
+  const cart = useSelector((state: RootState) => state.cart.cart);
+
+  useEffect(() => {
+    async function loadUserCart() {
+      auth.onAuthStateChanged(async () => {
+        const loadedCart = await getCart();
+        dispatch(loadCart(loadedCart))
+      });
+    }
+    loadUserCart();
+  }, [dispatch]);
+
+  useEffect(() => {
+    console.log(itemAmount);
+    sendCart(cart);
+  }, [itemAmount, cart]);
+
 
   function handleCartClick() {
     setCartOpen(true);
@@ -31,6 +51,8 @@ function App() {
 
   function handleAddToCart(product: Product) {
     dispatch(addToCart(product));
+    console.log(itemAmount);
+    sendCart(cart);
   }
 
   return (

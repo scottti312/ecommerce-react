@@ -72,7 +72,7 @@ const WelcomeWrapper = styled.div`
 `;
 
 const WelcomeDescription = styled.p`
-  font-size: 1.2em;
+  font-size: 1.5em;
   min-width: 100px;
   max-width: 1000px;
   height: 100%;
@@ -88,8 +88,6 @@ const WelcomeDescription = styled.p`
 `;
 
 const FooterContainer = styled.div`
-  /* position: sticky;
-  top: 100vh; */
   width: 100%;
   margin: 0 auto;
   background-color: black;

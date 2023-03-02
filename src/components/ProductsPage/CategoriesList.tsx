@@ -21,15 +21,16 @@ const CategoriesList = ({selected, handleSelect}: CategoriesListProps) => {
       <Form>
         {categories.map((category) => (
           <CategoryWrapper className="radio" key={category.value}>
-            <label id={category.value} style={{display: "flex"}}>
+            <CategoryButton id={category.value}>
               <input
                 type="radio"
                 id={category.value}
                 value={category.value}
                 checked={selected === category.value}
-                onChange={handleSelect} />
+                onChange={handleSelect}
+                style={{display: "none"}} />
               {category.label}
-            </label>
+            </CategoryButton>
           </CategoryWrapper>
         ))}
       </Form>
@@ -40,14 +41,38 @@ const CategoriesList = ({selected, handleSelect}: CategoriesListProps) => {
 const CategoriesContainer = styled.div`
   font-size: 1.5em;
   position: fixed;
-  top: 40%;
+  @media screen and (min-width: 870px) {
+    top: 40%;
+  }
+`;
 
+const CategoryButton = styled.label`
+  display: flex;
+  cursor: pointer;
+  border: 1px solid black;
+  padding: 8px;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  background-color: white;
+  color: black;
+
+  &:hover {
+    background-color: black;
+    color: white;
+  }
+  
 `;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 20px;
+  @media screen and (max-width: 870px) {
+    flex-direction: row;
+    gap: 40px;
+  }
 `
 
 const CategoryWrapper = styled.div`

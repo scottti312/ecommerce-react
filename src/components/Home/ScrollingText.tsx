@@ -18,13 +18,28 @@ const ScrollingText = () => {
 const ScrollContainerComp = () => {
   return (
     <ScrollContainer>
-      <ScrollText>Affordable</ScrollText>
-      <ScrollText>Cruelty-free</ScrollText>
-      <ScrollText>Free shipping on $10+</ScrollText>
-      <ScrollText>Detailed</ScrollText>
-      <ScrollText>High Quality</ScrollText>
-      <ScrollText>Durable</ScrollText>
-      <ScrollText>New collections</ScrollText>
+      <ScrollText>
+        <i className="fa-solid fa-check" style={{marginRight: "10px"}}></i>
+        Affordable
+      </ScrollText>
+      <ScrollText>
+        <i className="fa-solid fa-check" style={{marginRight: "10px"}}></i>
+        Cruelty-free</ScrollText>
+      <ScrollText>
+        <i className="fa-solid fa-check" style={{marginRight: "10px"}}></i>
+        Free shipping on $10+</ScrollText>
+      <ScrollText>
+        <i className="fa-solid fa-check" style={{marginRight: "10px"}}></i>
+        Detailed</ScrollText>
+      <ScrollText>
+        <i className="fa-solid fa-check" style={{marginRight: "10px"}}></i>
+        High Quality</ScrollText>
+      <ScrollText>
+        <i className="fa-solid fa-check" style={{marginRight: "10px"}}></i>
+        Durable</ScrollText>
+      <ScrollText>
+        <i className="fa-solid fa-check" style={{marginRight: "10px"}}></i>
+        New collections</ScrollText>
     </ScrollContainer>
   );
 }

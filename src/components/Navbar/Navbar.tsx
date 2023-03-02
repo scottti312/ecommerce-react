@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components/macro';
-import { COLORS } from '../colors';
+import { COLORS } from '../../colors';
 import {
   onAuthStateChanged,
   GoogleAuthProvider,
@@ -17,15 +17,15 @@ import {
   DocumentReference,
 } from 'firebase/firestore';
 
-import { auth, firestore } from '../firebase/firebase-config';
+import { auth, firestore } from '../../firebase/firebase-config';
 
 import { useDispatch } from 'react-redux';
 
-import { loadCart } from '../cartSlice';
+import { loadCart } from '../../cartSlice';
 import { useSelector } from "react-redux";
-import { RootState } from '../store';
+import { RootState } from '../../store';
 
-import useWindowSize from './useWindowSize';
+import useWindowSize from '../useWindowSize';
 import "./navstyles.css";
 
 interface NavbarProps {
@@ -42,8 +42,6 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
   const [hasItems, setHasItems] = useState(false);
   const [signedIn, setSignedIn] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  console.log(mobileMenuOpen);
 
   const dispatch = useDispatch();
   const cart = useSelector((state: RootState) => state.cart.cart);
@@ -79,19 +77,18 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
     });
   }, []);
 
+  useEffect(() => {
+  });
 
   async function handleSignIn() {
     var provider = new GoogleAuthProvider();
     await signInWithPopup(auth, provider);
-    // if (cartExists) {
-    //   loadCart
-    // } else {
-    const docRef = doc(firestore, "users", "Scott Ti");
-    const docSnap = await getDoc(docRef);
+
+    getAndLoadCart();
     setSignedIn(true);
   };
 
-  async function getCart() {
+  async function getAndLoadCart() {
     const userName = auth.currentUser?.displayName;
     let docRef: DocumentReference | undefined;
     if (userName)
@@ -99,16 +96,13 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
     if (docRef) {
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        console.log(docSnap.data().cart);
         const loadedCart = docSnap.data().cart;
+        console.log('getandloadcart')
         dispatch(loadCart(loadedCart))
-        console.log(cart);
-
       } else {
         console.log('No such document');
       }
     }
-
   };
 
   async function sendCart() {
@@ -125,6 +119,7 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
   async function handleSignOut() {
     await signOut(auth);
     setSignedIn(false);
+    dispatch(loadCart([]))
   };
 
   function isUserSignedIn() {
@@ -135,6 +130,7 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
     setMobileMenuOpen(false);
   }
 
+
   const navbarClass = scrolled ? 'scrolled' : '';
 
   return (
@@ -142,10 +138,8 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
       <Nav>
         <Link to="/" className="title" style={{ ...LinkStyle }}>Sticker Avenue</Link>
         <RightNav>
-          {size.width > 990 &&
+          {size.width > 870 &&
             <>
-              <button onClick={sendCart}>Save Cart</button>
-              <button onClick={getCart}>Load Cart</button>
               <Link to="/about" style={LinkStyle}>About</Link>
               <Link to="/products" style={LinkStyle}>Products</Link>
               <CartButtonWrapper onClick={handleCartClick}>
@@ -165,6 +159,11 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
               }
             </>
           }
+          <MobileCartButtonWrapper onClick={handleCartClick}>
+            <ItemsIndicatorWrapper className={hasItems ? 'active' : 'inactive'}>
+              <ItemsIndicator>{itemAmount}</ItemsIndicator>
+            </ItemsIndicatorWrapper>
+          </MobileCartButtonWrapper>
           <MobileMenuIconWrapper onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
             <i className="fa-solid fa-bars"></i>
             <MobileMenuIcon />
@@ -176,9 +175,8 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
                   <CloseButton onClick={handleMenuClose}>
                     <i className="fa-solid fa-xmark fa-2xl"></i>
                   </CloseButton>
-                  <button onClick={sendCart}>Save Cart</button>
                 </TopBar>
-                <button onClick={getCart}>Load Cart</button>
+                {/* <button onClick={getCart}>Load Cart</button> */}
                 <Link to="/about" style={LinkStyle}>About</Link>
                 <Link to="/products" style={LinkStyle}>Products</Link>
                 <CartButtonWrapper onClick={handleCartClick}>
@@ -231,6 +229,7 @@ const Nav = styled.div`
   height: 65px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   text-align: center;
   text-decoration: none;
   padding: 0 30px 0 30px;
@@ -269,12 +268,23 @@ const ItemsIndicatorWrapper = styled.div`
 const ItemsIndicator = styled.div`
   background-color: red;
   color: white;
-  width: 22px;
-  height: 22px;
+  width: 25px;
+  height: 25px;
   border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8em;
+  @media screen and (max-width: 870px) {
+    width: 35px;
+    height: 35px;
+  }
 `;
 
 const CartButton = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
 `;
 
@@ -285,18 +295,27 @@ const UserSection = styled.div`
 
 const GreetUser = styled.div`
   font-size: 1em;
-  
 `;
 
 const SignInButton = styled.div`
   cursor: pointer;
 `;
 
-const MobileMenuIconWrapper = styled.div`
-    display: none;
-  @media screen and (max-width: 990px) {
+const MobileCartButtonWrapper = styled.div`
+  display: none;
+  @media screen and (max-width: 870px) {
     display: block;
     cursor: pointer;
+  }
+`;
+
+const MobileMenuIconWrapper = styled.div`
+    display: none;
+  @media screen and (max-width: 870px) {
+    display: flex;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
@@ -347,8 +366,8 @@ const MobileMenu = styled.div<MenuProps>`
   }
 
   ${ItemsIndicator} {
-    width: 25px;
-    height: 25px;
+    width: 35px;
+    height: 35px;
     font-size: 0.8em;
   }
 

@@ -151,7 +151,7 @@ const Menu = styled.div<MenuProps>`
   align-items: center;
   flex-direction: column;
   animation: ${({ isOpen }) => isOpen ? slideIn : slideOut} 0.2s ease-out;
-  @media screen and (max-width: 990px) {
+  @media screen and (max-width: 550px) {
     width: 100%;
   }
 `;

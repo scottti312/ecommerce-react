@@ -18,7 +18,7 @@ const ProductsSection = ({ selected }: ProductsSectionProps) => {
             .filter(product => product.category === 'food')
             .map((product: Product) => (
               <ProductWrapper key={product.id}>
-                <ProductDisplay product={product} />
+                <ProductDisplay product={product} page={"products"} />
               </ProductWrapper>
             ))
         }
@@ -28,7 +28,7 @@ const ProductsSection = ({ selected }: ProductsSectionProps) => {
             .filter(product => product.category === 'other')
             .map((product: Product) => (
               <ProductWrapper key={product.id}>
-                <ProductDisplay product={product} />
+                <ProductDisplay product={product} page={"products"} />
               </ProductWrapper>
             ))
         }
@@ -45,6 +45,9 @@ const ProductsContainer = styled.div`
   /* grid-template-columns: repeat(3, 200px); */
   gap: 5px;
   width: 100%;
+  @media screen and (max-width: 505px) {
+    grid-template-columns: repeat(auto-fit, 100%);
+  }
 `;
 
 const ProductWrapper = styled.div`

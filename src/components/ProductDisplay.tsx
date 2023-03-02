@@ -1,17 +1,30 @@
-import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components/macro";
 import { addToCart } from "../cartSlice";
 import { COLORS } from "../colors";
+import { sendCart } from "../firestore";
+import { RootState } from "../store";
 import { Product } from "../util/Products";
 
-interface FeaturedProductProps {
+interface ProductDisplayProps {
   product: Product;
+  page: string;
 }
 
-const ProductDisplay = ({ product }: FeaturedProductProps) => {
-  const { id, title, price, src, alt } = product;
+const ProductDisplay = ({ product, page }: ProductDisplayProps) => {
+  // const itemAmount = useSelector((state: RootState) => state.cart.itemAmount);
+  // const cart = useSelector((state: RootState) => state.cart.cart);
+
+  const { title, price, src, alt } = product;
   const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   console.log(itemAmount);
+  //   sendCart(cart);
+  // }, [itemAmount, cart]);
+
   const handleCartClick = (event: any) => {
     event.preventDefault();
     dispatch(addToCart(product));
@@ -19,17 +32,17 @@ const ProductDisplay = ({ product }: FeaturedProductProps) => {
 
   return (
     <Link to={`/products/${title}`} style={LinkStyle} state={{ product: product }}>
-      <ProductContainer>
-        <ProductWrapper>
+      <ProductContainer product={product} page={page}>
+        <ProductWrapper product={product} page={page}>
           <ProductImage src={src} alt={alt} />
         </ProductWrapper>
-        <ProductBottom>
+        <ProductBottom product={product} page={page}>
           <ProductInfo>
             <ProductTitle>{title}</ProductTitle>
             <ProductPrice>${price}</ProductPrice>
           </ProductInfo>
           <CartContainer onClick={handleCartClick}>
-            <CartWrapper>
+            <CartWrapper product={product} page={page}>
               <AddToCart>
                 <i className="fa-solid fa-cart-shopping fa-lg"></i>
               </AddToCart>
@@ -45,12 +58,18 @@ const ProductDisplay = ({ product }: FeaturedProductProps) => {
 const LinkStyle = {
   textDecoration: "none",
   color: "inherit",
+  width: "100%",
 };
 
-const ProductContainer = styled.div`
+const ProductContainer = styled.div<ProductDisplayProps>`
   width: 220px;
   display: flex;
   flex-direction: column;
+
+  @media screen and (max-width: 505px) {
+    width: ${props => props.page === "products" ? "100%" : "220px"};
+    flex-direction: ${props => props.page === "products" ? "row" : "column"};
+  }
 `;
 
 const rotateOnY = keyframes`
@@ -64,7 +83,7 @@ const ProductImage = styled.img`
   width: 100%;
 `;
 
-const ProductWrapper = styled.div`
+const ProductWrapper = styled.div<ProductDisplayProps>`
   display: flex;
   height: 120px;
   width: 120px;
@@ -81,13 +100,22 @@ const ProductWrapper = styled.div`
 
     animation: ${rotateOnY} 4s infinite linear;
   }
+  @media screen and (max-width: 505px) {
+    width: ${props => props.page === "products" ? "100px": "120px"};
+    height: ${props => props.page === "products" ? "100px": "120px"};
+  }
 `;
 
-const ProductBottom = styled.div`
+const ProductBottom = styled.div<ProductDisplayProps>`
   display: flex;
   justify-content: space-between;
   padding: 0 20px 0 20px;
   align-items: center;
+  width: 180px;
+  @media screen and (max-width: 505px) {
+    width: ${props => props.page === "products" ? "150px": "180px"};
+    justify-content: space-between;
+  }
 `;
 
 const ProductInfo = styled.div`
@@ -98,7 +126,7 @@ const CartContainer = styled.div`
   z-index: 3;
 `;
 
-const CartWrapper = styled.div`
+const CartWrapper = styled.div<ProductDisplayProps>`
   padding: 10px;
   border-radius: 12px;
   background-color: ${COLORS.addcart_bg};
@@ -112,6 +140,9 @@ const CartWrapper = styled.div`
 
   &:hover:active {
     transform: scale(0.8);
+  }
+  @media screen and (max-width: 505px) {
+    padding: ${props => props.page === "products" ? "15px": "10px"};
   }
 `;
 

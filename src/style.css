@@ -18,11 +18,17 @@
   src: url(./resources/fonts/Bubble\ Rainbow.ttf);
 }
 
+@font-face {
+  font-family: Balsamiq;
+  src: url(./resources//fonts/balsamiq/BalsamiqSans-Regular.ttf);
+}
+
 body {
   background-color: #faebd7;
   /* font-family: calibre; */
   margin: 0;
   height: 100%;
+  font-family: Balsamiq;
 }
 
 .hidden {

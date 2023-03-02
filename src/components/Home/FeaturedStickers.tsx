@@ -26,7 +26,7 @@ const FeaturedStickers = () => {
         <FeaturedWrapper ref={containerRef}>
           {productsArr.map((product: Product) => (
             <div key={product.id}>
-              <ProductDisplay product={product} />
+              <ProductDisplay product={product} page={"featured"} />
 
             </div>
           ))}
@@ -90,6 +90,7 @@ const FeaturedWrapper = styled.div`
   @media screen and (max-width: 990px) {
     width: 100%;
   }
+
 `;
 
 
@@ -106,5 +107,6 @@ const Credit = styled.a`
     text-decoration: none;
   }
 `;
+
 
 export default FeaturedStickers;
