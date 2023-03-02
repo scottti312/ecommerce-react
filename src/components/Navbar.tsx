@@ -26,6 +26,7 @@ import { useSelector } from "react-redux";
 import { RootState } from '../store';
 
 import useWindowSize from './useWindowSize';
+import "./navstyles.css";
 
 interface NavbarProps {
   itemAmount: number;
@@ -139,7 +140,7 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
   return (
     <NavWrapper className={navbarClass}>
       <Nav>
-        <Link to="/" style={{ ...LinkStyle, ...Title }}>Sticker Avenue</Link>
+        <Link to="/" className="title" style={{ ...LinkStyle }}>Sticker Avenue</Link>
         <RightNav>
           {size.width > 990 &&
             <>
@@ -229,7 +230,7 @@ const NavWrapper = styled.div`
 
 const Nav = styled.div`
   width: 1500px;
-  max-height: 65px;
+  height: 65px;
   display: flex;
   justify-content: space-between;
   text-align: center;
@@ -237,21 +238,17 @@ const Nav = styled.div`
   padding: 0 30px 0 30px;
 `;
 
-const Title = {
-  fontSize: '3em',
-};
-
 const RightNav = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 1.4em;
   gap: 20px;
 `;
 
 const LinkStyle = {
   color: "black",
   textDecoration: "none",
-  fontSize: '1.4em',
 }
 
 const CartButtonWrapper = styled.div`
@@ -280,7 +277,6 @@ const ItemsIndicator = styled.div`
 `;
 
 const CartButton = styled.div`
-  font-size: 1.4em;
   cursor: pointer;
 `;
 
@@ -393,7 +389,7 @@ const MenuBackground = styled.div<MenuProps>`
 `;
 
 const SignOutButton = styled.div`
-  font-size: 1em;
+  font-size: 0.8em;
   cursor: pointer;
 `;
 

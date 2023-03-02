@@ -69,11 +69,18 @@ const WelcomeWrapper = styled.div`
 
 const WelcomeDescription = styled.p`
   font-size: 1.2em;
-  min-width: 500px;
+  min-width: 300px;
   max-width: 1000px;
-  max-height: 1000px;
+  height: 100%;
   padding-left: 10%;
+  margin-top: 40px;
   line-height: 1.7em;
+  @media screen and (max-width: 400px) {
+    line-height: 1.4em;
+    font-size: 1em;
+    padding-left: 0;
+    text-align: center;
+  }
 `;
 
 const FooterContainer = styled.div`

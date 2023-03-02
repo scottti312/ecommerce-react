@@ -1,0 +1,12 @@
+.title {
+  display: flex;
+  font-size: 2em;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 400px) {
+  .title {
+    font-size: 1.7em;
+  }
+}
