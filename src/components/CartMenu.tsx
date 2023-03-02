@@ -142,8 +142,7 @@ const Menu = styled.div<MenuProps>`
   background-color: ${COLORS.primary_bg};
   top: 0;
   right: 0;
-  width: 25%;
-  min-width: 500px;
+  width: 500px;
   height: 100%;
   position: fixed;
   z-index: 10;
@@ -152,6 +151,9 @@ const Menu = styled.div<MenuProps>`
   align-items: center;
   flex-direction: column;
   animation: ${({ isOpen }) => isOpen ? slideIn : slideOut} 0.2s ease-out;
+  @media screen and (max-width: 990px) {
+    width: 100%;
+  }
 `;
 
 const TopBar = styled.div`

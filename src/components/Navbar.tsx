@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components/macro';
+import styled, { keyframes } from 'styled-components/macro';
 import { COLORS } from '../colors';
 import {
   onAuthStateChanged,
@@ -10,7 +10,6 @@ import {
 } from 'firebase/auth';
 
 import {
-  getFirestore,
   collection,
   setDoc,
   doc,
@@ -26,18 +25,28 @@ import { loadCart } from '../cartSlice';
 import { useSelector } from "react-redux";
 import { RootState } from '../store';
 
+import useWindowSize from './useWindowSize';
+
 interface NavbarProps {
   itemAmount: number;
   handleCartClick: () => void;
+}
+
+interface MenuProps {
+  isOpen: boolean;
 }
 
 const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
   const [scrolled, setScrolled] = useState(false);
   const [hasItems, setHasItems] = useState(false);
   const [signedIn, setSignedIn] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  console.log(mobileMenuOpen);
 
   const dispatch = useDispatch();
   const cart = useSelector((state: RootState) => state.cart.cart);
+  const size = useWindowSize();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,7 +59,6 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
 
   useEffect(() => {
     if (itemAmount > 0) {
@@ -77,7 +85,7 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
     // if (cartExists) {
     //   loadCart
     // } else {
-    const docRef = doc(getFirestore(), "users", "Scott Ti");
+    const docRef = doc(firestore, "users", "Scott Ti");
     const docSnap = await getDoc(docRef);
     setSignedIn(true);
   };
@@ -86,7 +94,7 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
     const userName = auth.currentUser?.displayName;
     let docRef: DocumentReference | undefined;
     if (userName)
-      docRef = doc(getFirestore(), 'users', userName);
+      docRef = doc(firestore, 'users', userName);
     if (docRef) {
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
@@ -103,7 +111,7 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
   };
 
   async function sendCart() {
-    const usersRef = collection(getFirestore(), 'users');
+    const usersRef = collection(firestore, 'users');
     const userName = auth.currentUser?.displayName;
     if (userName) {
       await setDoc(doc(usersRef, userName), {
@@ -122,6 +130,10 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
     return auth.currentUser;
   }
 
+  function handleMenuClose() {
+    setMobileMenuOpen(false);
+  }
+
   const navbarClass = scrolled ? 'scrolled' : '';
 
   return (
@@ -129,26 +141,69 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
       <Nav>
         <Link to="/" style={{ ...LinkStyle, ...Title }}>Sticker Avenue</Link>
         <RightNav>
-          <button onClick={sendCart}>Save Cart</button>
-          <button onClick={getCart}>Load Cart</button>
-          <Link to="/about" style={LinkStyle}>About</Link>
-          <Link to="/products" style={LinkStyle}>Products</Link>
-          <CartButtonWrapper onClick={handleCartClick}>
-            <CartButton>Cart</CartButton>
-            <ItemsIndicatorWrapper className={hasItems ? 'active' : 'inactive'}>
-              <ItemsIndicator>{itemAmount}</ItemsIndicator>
-            </ItemsIndicatorWrapper>
-          </CartButtonWrapper>
-          {isUserSignedIn() &&
-            <UserSection>
-              <GreetUser>Hi, {auth.currentUser?.displayName?.split(' ')[0]}!</GreetUser>
-              <SignOutButton onClick={handleSignOut}>Sign out</SignOutButton>
-            </UserSection>
+          {size.width > 990 &&
+            <>
+              <button onClick={sendCart}>Save Cart</button>
+              <button onClick={getCart}>Load Cart</button>
+              <Link to="/about" style={LinkStyle}>About</Link>
+              <Link to="/products" style={LinkStyle}>Products</Link>
+              <CartButtonWrapper onClick={handleCartClick}>
+                <CartButton>Cart</CartButton>
+                <ItemsIndicatorWrapper className={hasItems ? 'active' : 'inactive'}>
+                  <ItemsIndicator>{itemAmount}</ItemsIndicator>
+                </ItemsIndicatorWrapper>
+              </CartButtonWrapper>
+              {isUserSignedIn() &&
+                <UserSection>
+                  <GreetUser>Hi, {auth.currentUser?.displayName?.split(' ')[0]}!</GreetUser>
+                  <SignOutButton onClick={handleSignOut}>Sign out</SignOutButton>
+                </UserSection>
+              }
+              {!isUserSignedIn() &&
+                <SignInButton onClick={handleSignIn}>Sign In</SignInButton>
+              }
+            </>
           }
-          {!isUserSignedIn() &&
-            <SignInButton onClick={handleSignIn}>Sign In</SignInButton>
-          }
+          {/* hamburger menu icon */}
+          <MobileMenuIconWrapper onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+            <i className="fa-solid fa-bars"></i>
+            <MobileMenuIcon />
+          </MobileMenuIconWrapper>
+          {/* mobile menu */}
+          {mobileMenuOpen && (
+            <>
+              <MobileMenu isOpen={mobileMenuOpen}>
+                <TopBar>
+                  <CloseButton onClick={handleMenuClose}>
+                    <i className="fa-solid fa-xmark fa-2xl"></i>
+                  </CloseButton>
+                  <button onClick={sendCart}>Save Cart</button>
+                </TopBar>
+                <button onClick={getCart}>Load Cart</button>
+                <Link to="/about" style={LinkStyle}>About</Link>
+                <Link to="/products" style={LinkStyle}>Products</Link>
+                <CartButtonWrapper onClick={handleCartClick}>
+                  <CartButton>Cart</CartButton>
+                  <ItemsIndicatorWrapper className={hasItems ? 'active' : 'inactive'}>
+                    <ItemsIndicator>{itemAmount}</ItemsIndicator>
+                  </ItemsIndicatorWrapper>
+                </CartButtonWrapper>
+                {isUserSignedIn() &&
+                  <UserSection>
+                    <GreetUser>Hi, {auth.currentUser?.displayName?.split(' ')[0]}!</GreetUser>
+                    <SignOutButton onClick={handleSignOut}>Sign out</SignOutButton>
+                  </UserSection>
+                }
+                {!isUserSignedIn() &&
+                  <SignInButton onClick={handleSignIn}>Sign In</SignInButton>
+                }
+              </MobileMenu>
+              <MenuBackground isOpen={mobileMenuOpen} onClick={handleMenuClose}></MenuBackground>
+            </>
+          )}
         </RightNav>
+
+
       </Nav>
 
     </NavWrapper>
@@ -162,6 +217,8 @@ const NavWrapper = styled.div`
   top: 0;
   z-index: 7;
   transition: all 0.2s ease-in-out;
+  display: flex;
+  justify-content: center;
 
   &.scrolled {
     background-color: ${COLORS.secondary_bg};
@@ -171,12 +228,13 @@ const NavWrapper = styled.div`
 `;
 
 const Nav = styled.div`
-  width: 100%;
+  width: 1500px;
+  max-height: 65px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   text-align: center;
-  align-items: center;
-  text-decoration: none,
+  text-decoration: none;
+  padding: 0 30px 0 30px;
 `;
 
 const Title = {
@@ -187,7 +245,7 @@ const RightNav = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 5vw;
+  gap: 20px;
 `;
 
 const LinkStyle = {
@@ -239,6 +297,99 @@ const GreetUser = styled.div`
 const SignInButton = styled.div`
   font-size: 1.4em;
   cursor: pointer;
+`;
+
+const MobileMenuIconWrapper = styled.div`
+    display: none;
+  @media screen and (max-width: 990px) {
+    display: block;
+    cursor: pointer;
+  }
+`;
+
+const MobileMenuIcon = styled.div`
+  
+`;
+
+const slideIn = keyframes`
+  from {
+    transform: translateY(-140%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+`;
+
+const slideOut = keyframes`
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+`
+
+const MobileMenu = styled.div<MenuProps>`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  position: absolute;
+  width: 100%;
+  top: 65px;
+  left: 0;
+  padding: 20px 0 20px 0;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  background-color: ${COLORS.hover_bg};
+  box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.25);
+  animation: ${({ isOpen }) => isOpen ? slideIn : slideOut} 0.3s ease-out;
+  
+  z-index: 7;
+
+`;
+
+const TopBar = styled.div`
+  
+`;
+
+const CloseButton = styled.div`
+  position: absolute;
+  left: 30px;
+  z-index: 5;
+  cursor: pointer;
+`;
+
+const opacityFadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
+const opacityFadeOut = keyframes`
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+`;
+const MenuBackground = styled.div<MenuProps>`
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(2px);
+  background-color: rgba(0,0,0,0.3);
+  z-index: 5;
+  animation: ${({ isOpen }) => isOpen ? opacityFadeIn : opacityFadeOut} 0.5s ease;
 `;
 
 const SignOutButton = styled.div`

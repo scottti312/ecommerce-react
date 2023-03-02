@@ -4,17 +4,10 @@ import styled from 'styled-components/macro';
 import Products, { Product } from "../../util/Products";
 import ProductDisplay from '../ProductDisplay';
 
-interface ContainerState {
-  isDragging: boolean;
-  startX: number;
-  scrollLeft: number;
-}
-
 const FeaturedStickers = () => {
   const { bread, love, bedding, grain, shampoo } = Products;
   const productsArr = [bread, love, bedding, grain, shampoo];
   const containerRef = useRef<HTMLDivElement>(null);
-  const [scrollLeft, setScrollLeft] = useState(0);
 
   useEffect(() => {
     const scrollContainer = containerRef.current;
@@ -25,6 +18,7 @@ const FeaturedStickers = () => {
       })
     }
   }, []);
+
   return (
     <SectionContainer>
       <FeaturedTitle>Featured Stickers</FeaturedTitle>
@@ -63,11 +57,14 @@ const FeaturedTitle = styled.div`
 
 const FeaturedContainer = styled.div`
   display: flex;
-  width: 65%;
+  width: 70%;
   height: 100%;
   justify-content: center;
   align-items: center;
   padding: 10px;
+  @media screen and (max-width: 990px) {
+    width: 100%;
+  }
 `;
 
 const FeaturedWrapper = styled.div`
@@ -79,6 +76,8 @@ const FeaturedWrapper = styled.div`
   align-items: center;
   padding: 30px;
   scroll-behavior: smooth;
+  border: 1px solid black;
+  box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.45);
   &::-webkit-scrollbar {
     height: 10px;
     width: 100%;
@@ -88,6 +87,9 @@ const FeaturedWrapper = styled.div`
   &::-webkit-scrollbar-thumb {
     background: #000;
     border-radius: 10px;
+  }
+  @media screen and (max-width: 990px) {
+    width: 100%;
   }
 `;
 

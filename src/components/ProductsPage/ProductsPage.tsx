@@ -28,7 +28,8 @@ const ProductsWrapper = styled.div`
   display: grid;
   grid-template-columns: 20% 80%;
   height: 100vh;
-  width: 100vw;
+  margin: 0 auto;
+  max-width: 2500px;
 `;
 
 const CategoriesContainer = styled.div`

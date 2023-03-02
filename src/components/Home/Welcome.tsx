@@ -23,7 +23,6 @@ const Welcome = () => {
 // `;
 
 const Welcomesvg1 = styled.svg`
-  margin: 0 auto auto 25%;
 `;
 
 export default Welcome;
