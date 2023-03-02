@@ -1,20 +1,38 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components/macro';
 
 import Products, { Product } from "../../util/Products";
 import ProductDisplay from '../ProductDisplay';
+import { debounce } from 'lodash';
+
+interface ContainerState {
+  isDragging: boolean;
+  startX: number;
+  scrollLeft: number;
+}
 
 const FeaturedStickers = () => {
   const { bread, love, bedding, grain, shampoo } = Products;
   const productsArr = [bread, love, bedding, grain, shampoo];
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [scrollLeft, setScrollLeft] = useState(0);
 
+  useEffect(() => {
+    const scrollContainer = containerRef.current;
+    if (scrollContainer) {
+      scrollContainer.addEventListener("wheel", (e) => {
+        e.preventDefault();
+        scrollContainer.scrollLeft += e.deltaY * 2;
+      })
+    }
+  }, []);
   return (
     <SectionContainer>
       <FeaturedTitle>Featured Stickers</FeaturedTitle>
       <FeaturedContainer>
-        <FeaturedWrapper>
+        <FeaturedWrapper ref={containerRef}>
           {productsArr.map((product: Product) => (
-            <div key={ product.id }>
+            <div key={product.id}>
               <ProductDisplay product={product} />
 
             </div>
@@ -29,9 +47,6 @@ const FeaturedStickers = () => {
     </SectionContainer>
   );
 };
-
-
-
 
 const SectionContainer = styled.div`
   width: 100%;
@@ -59,17 +74,21 @@ const FeaturedContainer = styled.div`
 const FeaturedWrapper = styled.div`
   overflow-x: scroll;
   overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-
-  width: 100%;
+  width: 800px;
   display: flex;
   gap: 20px;
   align-items: center;
   padding: 30px;
-  scrollbar-width: none;
-
+  scroll-behavior: smooth;
   &::-webkit-scrollbar {
-    display: none;
+    height: 10px;
+    width: 100%;
+    border-radius: 10px;
+    background-color: gray;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #000;
+    border-radius: 10px;
   }
 `;
 

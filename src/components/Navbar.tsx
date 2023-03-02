@@ -200,7 +200,7 @@ const CartButtonWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 5px;
   cursor: pointer;
 `;
 
@@ -208,23 +208,16 @@ const ItemsIndicatorWrapper = styled.div`
   transition: all 0.1s ease;
   transform: scale(0);
   transform-origin: center center;
-/* 
-  &.inactive {
-    display: none;
-  } */
   &.active {
     transform: scale(1);
   }
 `;
 
 const ItemsIndicator = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background-color: red;
   color: white;
-  width: 25px;
-  height: 25px;
+  width: 22px;
+  height: 22px;
   border-radius: 20px;
 `;
 

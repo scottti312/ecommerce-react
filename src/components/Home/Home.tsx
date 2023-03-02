@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect} from 'react';
 import styled from 'styled-components/macro';
 import ScrollingText from "./ScrollingText";
 import FeaturedStickers from './FeaturedStickers';
@@ -67,8 +67,8 @@ const WelcomeDescription = styled.p`
 `;
 
 const FooterContainer = styled.div`
-  position: sticky;
-  top: 100vh;
+  /* position: sticky;
+  top: 100vh; */
   width: 100%;
   margin: 0 auto;
   background-color: black;
