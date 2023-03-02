@@ -165,12 +165,10 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
               }
             </>
           }
-          {/* hamburger menu icon */}
           <MobileMenuIconWrapper onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
             <i className="fa-solid fa-bars"></i>
             <MobileMenuIcon />
           </MobileMenuIconWrapper>
-          {/* mobile menu */}
           {mobileMenuOpen && (
             <>
               <MobileMenu isOpen={mobileMenuOpen}>
@@ -291,7 +289,6 @@ const GreetUser = styled.div`
 `;
 
 const SignInButton = styled.div`
-  font-size: 1.4em;
   cursor: pointer;
 `;
 
@@ -343,8 +340,17 @@ const MobileMenu = styled.div<MenuProps>`
   background-color: ${COLORS.hover_bg};
   box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.25);
   animation: ${({ isOpen }) => isOpen ? slideIn : slideOut} 0.3s ease-out;
-  
   z-index: 7;
+
+  ${CartButtonWrapper} {
+    transform: translateX(11px);
+  }
+
+  ${ItemsIndicator} {
+    width: 25px;
+    height: 25px;
+    font-size: 0.8em;
+  }
 
 `;
 

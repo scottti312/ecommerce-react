@@ -65,17 +65,21 @@ const WelcomeWrapper = styled.div`
   flex-direction: column;
   background-color: ${COLORS.welcome_bg};
   padding: 130px 50px 60px 50px;
+
+  @media screen and (max-width: 550px) {
+    align-items: center;
+  }
 `;
 
 const WelcomeDescription = styled.p`
   font-size: 1.2em;
-  min-width: 300px;
+  min-width: 100px;
   max-width: 1000px;
   height: 100%;
   padding-left: 10%;
   margin-top: 40px;
   line-height: 1.7em;
-  @media screen and (max-width: 450px) {
+  @media screen and (max-width: 550px) {
     line-height: 1.7em;
     font-size: 1.1em;
     padding-left: 0;

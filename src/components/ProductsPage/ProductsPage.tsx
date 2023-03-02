@@ -45,6 +45,9 @@ const ProductsView = styled.div`
   align-items: center;
   justify-content: center;
   margin: 100px 10% 75px 10%;
+  @media screen and (max-width: 550px) {
+    margin: 100px 0 75px 0;
+  }
 `;
 
 export default ProductsPage;
