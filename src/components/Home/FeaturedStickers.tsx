@@ -3,7 +3,6 @@ import styled from 'styled-components/macro';
 
 import Products, { Product } from "../../util/Products";
 import ProductDisplay from '../ProductDisplay';
-import { debounce } from 'lodash';
 
 interface ContainerState {
   isDragging: boolean;
