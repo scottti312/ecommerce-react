@@ -75,9 +75,9 @@ const WelcomeDescription = styled.p`
   padding-left: 10%;
   margin-top: 40px;
   line-height: 1.7em;
-  @media screen and (max-width: 400px) {
-    line-height: 1.4em;
-    font-size: 1em;
+  @media screen and (max-width: 450px) {
+    line-height: 1.7em;
+    font-size: 1.1em;
     padding-left: 0;
     text-align: center;
   }

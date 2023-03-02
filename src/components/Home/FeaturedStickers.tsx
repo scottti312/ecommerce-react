@@ -61,7 +61,6 @@ const FeaturedContainer = styled.div`
   height: 100%;
   justify-content: center;
   align-items: center;
-  padding: 10px;
   @media screen and (max-width: 990px) {
     width: 100%;
   }
