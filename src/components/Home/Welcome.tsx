@@ -23,6 +23,10 @@ const Welcome = () => {
 // `;
 
 const Welcomesvg1 = styled.svg`
+  padding-left: 50px;
+  @media screen and (max-width: 550px){
+    padding: 0;
+  }
 `;
 
 export default Welcome;

@@ -24,6 +24,8 @@ import useWindowSize from '../useWindowSize';
 import "./navstyles.css";
 import { RootState } from '../../store';
 
+const mobileWidth = 760;
+
 interface NavbarProps {
   itemAmount: number;
   handleCartClick: () => void;
@@ -136,7 +138,7 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
       <Nav>
         <Link to="/" className="title" style={{ ...LinkStyle }}>Sticker Avenue</Link>
         <RightNav>
-          {size.width > 870 &&
+          {size.width > mobileWidth &&
             <>
               <Link to="/about" style={LinkStyle}>About</Link>
               <Link to="/products" style={LinkStyle}>Products</Link>
@@ -273,7 +275,7 @@ const ItemsIndicator = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 0.8em;
-  @media screen and (max-width: 870px) {
+  @media screen and (max-width: ${mobileWidth}px) {
     width: 35px;
     height: 35px;
   }
@@ -301,7 +303,7 @@ const SignInButton = styled.div`
 
 const MobileCartButtonWrapper = styled.div`
   display: none;
-  @media screen and (max-width: 870px) {
+  @media screen and (max-width: ${mobileWidth}px) {
     display: block;
     cursor: pointer;
   }
@@ -309,7 +311,7 @@ const MobileCartButtonWrapper = styled.div`
 
 const MobileMenuIconWrapper = styled.div`
     display: none;
-  @media screen and (max-width: 870px) {
+  @media screen and (max-width: ${mobileWidth}px) {
     display: flex;
     cursor: pointer;
     justify-content: center;

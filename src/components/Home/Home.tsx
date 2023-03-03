@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import styled, { keyframes } from 'styled-components/macro';
+import styled from 'styled-components/macro';
 import ScrollingText from "./ScrollingText";
 import FeaturedStickers from './FeaturedStickers';
 import { COLORS } from '../../colors';
