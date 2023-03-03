@@ -180,6 +180,7 @@ const Title = styled.div`
 
 const ItemsWrapper = styled.div`
   overflow: scroll;
+  overflow-x: hidden;
   width: 100%;
   @keyframes moveUp {
     0% {
@@ -189,7 +190,18 @@ const ItemsWrapper = styled.div`
       margin-top: 0px;
     }
   }
-  animation: moveUp 0.5s ease-out
+  animation: moveUp 0.5s ease-out;
+
+  &::-webkit-scrollbar {
+    height: 100%;
+    width: 10px;
+    border-radius: 10px;
+    background-color: gray;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #000;
+    border-radius: 10px;
+  }
 `;
 
 const EmptyWrapper = styled.div`
