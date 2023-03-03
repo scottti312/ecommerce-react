@@ -78,12 +78,14 @@ const WelcomeDescription = styled.p`
   max-width: 1000px;
   height: 100%;
   padding-left: 10%;
+  padding-right: 20px;
   margin-top: 40px;
   line-height: 1.7em;
   @media screen and (max-width: 550px) {
     line-height: 1.7em;
     font-size: 1.1em;
     padding-left: 0;
+    padding: 20px;
     text-align: center;
   }
 `;

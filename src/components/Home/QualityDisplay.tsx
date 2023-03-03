@@ -17,7 +17,7 @@ const QualityDisplay = () => {
           <TextWrapper>
             <Text>
               Only the{"\n"}
-              BEST stickers{"\n"}
+              <Best>BEST</Best> stickers{"\n"}
               on the{"\n"}
               internet{"\n"}
             </Text>
@@ -57,6 +57,24 @@ const Text = styled.div`
   color: white;
   font-size: clamp(2em, 3vw, 3em);
   white-space: pre-line;
+`;
+
+const Best = styled.div`
+  display: inline;
+  background: linear-gradient(to right, #8484ff, #72c7ff , #87fc87, #fd8fc6, #8787ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: rainbow_animation 3s ease-in-out infinite alternate;
+  background-size: 400% 100%;
+  @keyframes rainbow_animation {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 100% 0;
+    }
+  }
 `;
 
 const Stickers = css`
