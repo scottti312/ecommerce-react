@@ -49,6 +49,7 @@ const ProductContainer = styled.div`
   background-color: ${COLORS.product_bg};
   display: flex;
   justify-content: center;
+  align-items: center;
   height: 100vh;
   width: 100%;
   max-width: 1060px;

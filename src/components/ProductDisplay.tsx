@@ -108,10 +108,10 @@ const ProductBottom = styled.div<ProductDisplayProps>`
   align-items: center;
   width: 180px;
   @media screen and (max-width: 505px) {
-    flex-direction: column;
-    justify-content: center;
     gap: 20px;
     width: ${props => props.page === "products" ? "150px": "180px"};
+    flex-direction: ${props => props.page === "products" ? "column": "row"};
+    justify-content: ${props => props.page === "products" ? "center": "space-between"};
   }
 `;
 
