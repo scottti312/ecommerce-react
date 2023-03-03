@@ -76,7 +76,7 @@ const FeaturedWrapper = styled.div`
   align-items: center;
   padding: 30px;
   scroll-behavior: smooth;
-  border: 5px solid ${COLORS.hover_bg};
+  border: 2px solid black;
   &::-webkit-scrollbar {
     height: 10px;
     width: 100%;

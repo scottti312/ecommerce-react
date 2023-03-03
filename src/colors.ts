@@ -7,4 +7,5 @@ export const COLORS = {
   addcart_bg: "#ccffcc",
   hover_bg: "#add8e6",
   delete_bg: "#fc6868",
+  quality_bg: "#313C55"
 }

@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
-import styled from 'styled-components/macro';
+import styled, { keyframes } from 'styled-components/macro';
 import ScrollingText from "./ScrollingText";
 import FeaturedStickers from './FeaturedStickers';
 import { COLORS } from '../../colors';
 
 import Welcome from './Welcome';
+import QualityDisplay from './QualityDisplay';
 
 const Home = () => {
   const observer = new IntersectionObserver((entries) => {
@@ -30,6 +31,7 @@ const Home = () => {
           <WelcomeDescription>to Sticker Avenue, where stickers are our love language! We're so excited to have you here and can't wait to share our fun and colorful collection with you. So, come on in, take a look around, and let's add some personality to your world, one sticker at a time!</WelcomeDescription>
         </WelcomeWrapper>
       </WelcomeContainer>
+      <QualityDisplay />
       <ScrollingText />
       <FeaturedStickers />
       <FooterContainer>
@@ -64,7 +66,7 @@ const WelcomeWrapper = styled.div`
   display: flex;
   flex-direction: column;
   background-color: ${COLORS.welcome_bg};
-  padding: 130px 50px 60px 50px;
+  padding: 130px 0 60px 0;
 
   @media screen and (max-width: 550px) {
     align-items: center;
@@ -73,7 +75,6 @@ const WelcomeWrapper = styled.div`
 
 const WelcomeDescription = styled.p`
   font-size: 1.5em;
-  min-width: 100px;
   max-width: 1000px;
   height: 100%;
   padding-left: 10%;
@@ -86,6 +87,7 @@ const WelcomeDescription = styled.p`
     text-align: center;
   }
 `;
+
 
 const FooterContainer = styled.div`
   width: 100%;

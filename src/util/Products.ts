@@ -21,6 +21,17 @@ function createProduct(id: number, title: string, price: number, src: string, al
 }
 
 const apple = createProduct(hashCode('apple'), 'apple', 1.25, require("../resources/stickers/food/apple.png"), 'apple', 'food');
+const babyfood = createProduct(hashCode('babyfood'), 'babyfood', 1.25, require("../resources/stickers/food/babyfood.png"), 'babyfood', 'food');
+const cheese = createProduct(hashCode('cheese'), 'cheese', 1.25, require("../resources/stickers/food/cheese.png"), 'cheese', 'food');
+const cherry = createProduct(hashCode('cherry'), 'cherry', 1.25, require("../resources/stickers/food/cherry.png"), 'cherry', 'food');
+const croissant = createProduct(hashCode('croissant'), 'croissant', 1.25, require("../resources/stickers/food/croissant.png"), 'croissant', 'food');
+const hotdog = createProduct(hashCode('hotdog'), 'hotdog', 1.25, require("../resources/stickers/food/hotdog.png"), 'hotdog', 'food');
+const nachos = createProduct(hashCode('nachos'), 'nachos', 1.25, require("../resources/stickers/food/nachos.png"), 'nachos', 'food');
+const noodles = createProduct(hashCode('noodles'), 'noodles', 1.25, require("../resources/stickers/food/noodles.png"), 'noodles', 'food');
+const onigiri = createProduct(hashCode('onigiri'), 'onigiri', 1.25, require("../resources/stickers/food/onigiri.png"), 'onigiri', 'food');
+const rice = createProduct(hashCode('rice'), 'rice', 1.25, require("../resources/stickers/food/rice.png"), 'rice', 'food');
+const shrimp = createProduct(hashCode('shrimp'), 'shrimp', 1.25, require("../resources/stickers/food/shrimp.png"), 'shrimp', 'food');
+const watermelon = createProduct(hashCode('watermelon'), 'watermelon', 1.25, require("../resources/stickers/food/watermelon.png"), 'watermelon', 'food');
 const bread = createProduct(hashCode('bread'), 'bread', 1.25, require("../resources/stickers/food/bread.png"), 'bread', 'food');
 const burger = createProduct(hashCode('burger'), 'burger', 1.25, require("../resources/stickers/food/burger.png"), 'burger', 'food');
 const chicken = createProduct(hashCode('chicken'), 'chicken', 1.25, require("../resources/stickers/food/chicken.png"), 'chicken', 'food');
@@ -57,6 +68,17 @@ const Products: Record<string, Product> = {
   nigiri,
   pizza,
   taco,
+  babyfood,
+  cheese,
+  cherry,
+  croissant,
+  hotdog,
+  nachos,
+  noodles,
+  onigiri,
+  rice,
+  shrimp,
+  watermelon,
 
   bedding,
   clothes,
