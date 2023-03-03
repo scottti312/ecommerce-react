@@ -29,14 +29,15 @@ function App() {
     async function loadUserCart() {
       auth.onAuthStateChanged(async () => {
         const loadedCart = await getCart();
-        dispatch(loadCart(loadedCart))
+        if (loadedCart) {
+          dispatch(loadCart(loadedCart))
+        }
       });
     }
     loadUserCart();
   }, [dispatch]);
 
   useEffect(() => {
-    console.log(itemAmount);
     sendCart(cart);
   }, [itemAmount, cart]);
 
@@ -51,7 +52,6 @@ function App() {
 
   function handleAddToCart(product: Product) {
     dispatch(addToCart(product));
-    console.log(itemAmount);
     sendCart(cart);
   }
 

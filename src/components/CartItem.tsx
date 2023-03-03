@@ -18,6 +18,7 @@ const CartItem = ({ product, quantity }: CartItemProps) => {
   const { src, title, price } = product;
 
   function handleMore(product: Product) {
+    console.log('yup');
     dispatch(addToCart(product));
   }
 

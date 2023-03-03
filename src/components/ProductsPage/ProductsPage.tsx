@@ -18,6 +18,7 @@ const ProductsPage = () => {
         <CategoriesList selected={selected} handleSelect={handleSelect} />
       </CategoriesContainer>
       <ProductsView>
+        <SelectedTitle>{selected}</SelectedTitle>
         <ProductsSection selected={selected} />
       </ProductsView>
     </ProductsWrapper>
@@ -55,12 +56,17 @@ const CategoriesContainer = styled.div`
 
 const ProductsView = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   margin: 100px 10% 75px 10%;
   @media screen and (max-width: 870px) {
     margin: 150px 0 90px 0;
   }
+`;
+
+const SelectedTitle = styled.div`
+  font-size: 3em;
 `;
 
 export default ProductsPage;

@@ -10,23 +10,19 @@ import {
 } from 'firebase/auth';
 
 import {
-  collection,
-  setDoc,
   doc,
   getDoc,
   DocumentReference,
 } from 'firebase/firestore';
 
 import { auth, firestore } from '../../firebase/firebase-config';
-
 import { useDispatch } from 'react-redux';
-
-import { loadCart } from '../../cartSlice';
-import { useSelector } from "react-redux";
-import { RootState } from '../../store';
-
+import { addToCart } from '../../cartSlice';
+import { useSelector } from 'react-redux';
+import { loadCart, ProductInCart } from '../../cartSlice';
 import useWindowSize from '../useWindowSize';
 import "./navstyles.css";
+import { RootState } from '../../store';
 
 interface NavbarProps {
   itemAmount: number;
@@ -44,8 +40,8 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const dispatch = useDispatch();
-  const cart = useSelector((state: RootState) => state.cart.cart);
   const size = useWindowSize();
+  const cart = useSelector((state: RootState) => state.cart.cart);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -84,7 +80,8 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
     var provider = new GoogleAuthProvider();
     await signInWithPopup(auth, provider);
 
-    getAndLoadCart();
+    // getAndLoadCart();
+    getLoadCombineCarts();
     setSignedIn(true);
   };
 
@@ -97,7 +94,6 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         const loadedCart = docSnap.data().cart;
-        console.log('getandloadcart')
         dispatch(loadCart(loadedCart))
       } else {
         console.log('No such document');
@@ -105,16 +101,37 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
     }
   };
 
-  async function sendCart() {
-    const usersRef = collection(firestore, 'users');
+  async function getLoadCombineCarts() {
     const userName = auth.currentUser?.displayName;
-    if (userName) {
-      await setDoc(doc(usersRef, userName), {
-        name: userName,
-        cart: cart,
-      });
+    let docRef: DocumentReference | undefined;
+    // get
+    if (userName)
+      docRef = doc(firestore, 'users', userName);
+    if (docRef) {
+      // load
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        // combine
+        const loadedCart: ProductInCart[] = docSnap.data().cart;
+        for (let j = 0; j < cart.length; j++) {
+          for (let i = 0; i < loadedCart.length; i++) {
+            if (cart[j].product.title === loadedCart[i].product.title) {
+              for (let k = 0; k < loadedCart[i].quantity; k++) {
+                dispatch(addToCart(loadedCart[i].product));
+              }
+              loadedCart.splice(i, 1);
+            }
+          }
+        }
+        if (loadedCart.length !== 0) {
+          const newCart = (cart.concat(loadedCart));
+          dispatch(loadCart(newCart));
+        }
+      } else {
+        console.log('No such document');
+      }
     }
-  };
+  }
 
   async function handleSignOut() {
     await signOut(auth);
@@ -129,7 +146,6 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
   function handleMenuClose() {
     setMobileMenuOpen(false);
   }
-
 
   const navbarClass = scrolled ? 'scrolled' : '';
 
@@ -176,9 +192,8 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
                     <i className="fa-solid fa-xmark fa-2xl"></i>
                   </CloseButton>
                 </TopBar>
-                {/* <button onClick={getCart}>Load Cart</button> */}
-                <Link to="/about" style={LinkStyle}>About</Link>
-                <Link to="/products" style={LinkStyle}>Products</Link>
+                <Link to="/about" style={LinkStyle} onClick={handleMenuClose}>About</Link>
+                <Link to="/products" style={LinkStyle} onClick={handleMenuClose}>Products</Link>
                 <CartButtonWrapper onClick={handleCartClick}>
                   <CartButton>Cart</CartButton>
                   <ItemsIndicatorWrapper className={hasItems ? 'active' : 'inactive'}>
@@ -225,7 +240,8 @@ const NavWrapper = styled.div`
 `;
 
 const Nav = styled.div`
-  width: 1500px;
+  width: 100%;
+  max-width: 1500px;
   height: 65px;
   display: flex;
   justify-content: space-between;
@@ -363,6 +379,7 @@ const MobileMenu = styled.div<MenuProps>`
 
   ${CartButtonWrapper} {
     transform: translateX(11px);
+    width: 500px;
   }
 
   ${ItemsIndicator} {

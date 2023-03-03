@@ -57,12 +57,12 @@ const CategoryButton = styled.label`
   transition: all 0.3s ease;
   background-color: white;
   color: black;
+  user-select: none;
 
   &:hover {
     background-color: black;
     color: white;
   }
-  
 `;
 
 const Form = styled.form`

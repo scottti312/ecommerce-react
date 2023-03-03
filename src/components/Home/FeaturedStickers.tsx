@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components/macro';
+import { COLORS } from '../../colors';
 
 import Products, { Product } from "../../util/Products";
 import ProductDisplay from '../ProductDisplay';
@@ -75,8 +76,7 @@ const FeaturedWrapper = styled.div`
   align-items: center;
   padding: 30px;
   scroll-behavior: smooth;
-  border: 1px solid black;
-  box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.45);
+  border: 5px solid ${COLORS.hover_bg};
   &::-webkit-scrollbar {
     height: 10px;
     width: 100%;
@@ -89,6 +89,8 @@ const FeaturedWrapper = styled.div`
   }
   @media screen and (max-width: 990px) {
     width: 100%;
+    border: none;
+    box-shadow: none;
   }
 
 `;

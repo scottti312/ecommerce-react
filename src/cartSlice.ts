@@ -60,7 +60,6 @@ export const cartSlice = createSlice({
       }
     },
     loadCart: (state, action: PayloadAction<ProductInCart[]>) => {
-      console.log('test');
       const loadedCart = action.payload;
       state.cart = loadedCart;
       let totalQuantity = 0;

@@ -1,11 +1,9 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components/macro";
 import { addToCart } from "../cartSlice";
 import { COLORS } from "../colors";
-import { sendCart } from "../firestore";
-import { RootState } from "../store";
+
 import { Product } from "../util/Products";
 
 interface ProductDisplayProps {
@@ -20,11 +18,6 @@ const ProductDisplay = ({ product, page }: ProductDisplayProps) => {
   const { title, price, src, alt } = product;
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   console.log(itemAmount);
-  //   sendCart(cart);
-  // }, [itemAmount, cart]);
-
   const handleCartClick = (event: any) => {
     event.preventDefault();
     dispatch(addToCart(product));
@@ -37,7 +30,7 @@ const ProductDisplay = ({ product, page }: ProductDisplayProps) => {
           <ProductImage src={src} alt={alt} />
         </ProductWrapper>
         <ProductBottom product={product} page={page}>
-          <ProductInfo>
+          <ProductInfo product={product} page={page}>
             <ProductTitle>{title}</ProductTitle>
             <ProductPrice>${price}</ProductPrice>
           </ProductInfo>
@@ -81,6 +74,8 @@ const rotateOnY = keyframes`
 const ProductImage = styled.img`
   height: 100%;
   width: 100%;
+  min-width: 100px;
+  min-height: 100px;
 `;
 
 const ProductWrapper = styled.div<ProductDisplayProps>`
@@ -113,12 +108,15 @@ const ProductBottom = styled.div<ProductDisplayProps>`
   align-items: center;
   width: 180px;
   @media screen and (max-width: 505px) {
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
     width: ${props => props.page === "products" ? "150px": "180px"};
-    justify-content: space-between;
   }
 `;
 
-const ProductInfo = styled.div`
+const ProductInfo = styled.div<ProductDisplayProps>`
+    text-align: ${props => props.page === "products" ? "center": "start"};
 `;
 
 const CartContainer = styled.div`
@@ -142,7 +140,7 @@ const CartWrapper = styled.div<ProductDisplayProps>`
     transform: scale(0.8);
   }
   @media screen and (max-width: 505px) {
-    padding: ${props => props.page === "products" ? "15px": "10px"};
+    padding: ${props => props.page === "products" ? "13px": "10px"};
   }
 `;
 
