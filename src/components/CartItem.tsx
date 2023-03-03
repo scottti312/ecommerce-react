@@ -70,6 +70,7 @@ const ItemWrapper = styled.div`
   padding: 50px 30px 50px 30px;
   gap: 20px;
   border-bottom: 1px solid gray;
+  background-color: white;
 `;
 
 const ItemImage = styled.img`
@@ -153,7 +154,7 @@ const DeleteButton = styled.div`
   cursor: pointer;
   user-select: none;
   &:hover {
-    background-color: ${COLORS.primary_bg};
+    background-color: transparent;
   }
 
   &:active {

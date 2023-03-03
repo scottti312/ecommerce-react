@@ -1,9 +1,25 @@
+import { useEffect } from "react";
 import styled, { css } from "styled-components/macro";
 import { COLORS } from "../../colors";
 import Products from "../../util/Products";
 
 const QualityDisplay = () => {
   const { pizza, frappe, egg, taco, nigiri, icecream, watermelon, cherry } = Products;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+      } else {
+        entry.target.classList.remove('show');
+      }
+    })
+  });
+
+  useEffect(() => {
+    const hiddenElements = document.querySelectorAll('.hidden');
+    hiddenElements.forEach((el) => observer.observe(el));
+  });
+
   return (
     <>
       <QualityContainer>
@@ -14,7 +30,7 @@ const QualityDisplay = () => {
             <Nigiri src={nigiri.src} />
             <Taco src={taco.src} />
           </LeftStickers>
-          <TextWrapper>
+          <TextWrapper className="hidden">
             <Text>
               Only the{"\n"}
               <Best>BEST</Best> stickers{"\n"}
