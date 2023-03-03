@@ -85,22 +85,6 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
     setSignedIn(true);
   };
 
-  async function getAndLoadCart() {
-    const userName = auth.currentUser?.displayName;
-    let docRef: DocumentReference | undefined;
-    if (userName)
-      docRef = doc(firestore, 'users', userName);
-    if (docRef) {
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        const loadedCart = docSnap.data().cart;
-        dispatch(loadCart(loadedCart))
-      } else {
-        console.log('No such document');
-      }
-    }
-  };
-
   async function getLoadCombineCarts() {
     const userName = auth.currentUser?.displayName;
     let docRef: DocumentReference | undefined;
@@ -123,10 +107,8 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
             }
           }
         }
-        if (loadedCart.length !== 0) {
-          const newCart = (cart.concat(loadedCart));
-          dispatch(loadCart(newCart));
-        }
+        const newCart = (cart.concat(loadedCart));
+        dispatch(loadCart(newCart));
       } else {
         console.log('No such document');
       }
