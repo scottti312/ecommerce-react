@@ -5,6 +5,12 @@ import Products from "../../util/Products";
 
 const QualityDisplay = () => {
   const { pizza, frappe, egg, taco, nigiri, icecream, watermelon, cherry } = Products;
+
+  const options = {
+    rootMargin: '0px 0px 50% 0px',
+    threshold: 0.5
+  }
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
@@ -13,7 +19,7 @@ const QualityDisplay = () => {
         entry.target.classList.remove('show');
       }
     })
-  });
+  }, options);
 
   useEffect(() => {
     const hiddenElements = document.querySelectorAll('.hidden');
@@ -22,7 +28,7 @@ const QualityDisplay = () => {
 
   return (
     <>
-      <QualityContainer>
+      <QualityContainer className="qualitycontainer">
         <QualityWrapper>
           <LeftStickers>
             <Pizza src={pizza.src} />
@@ -53,7 +59,6 @@ const QualityDisplay = () => {
 const QualityContainer = styled.div`
   width: 100%;
   height: 1000px;
-  background-color: ${COLORS.quality_bg};
 `;
 
 const QualityWrapper = styled.div`

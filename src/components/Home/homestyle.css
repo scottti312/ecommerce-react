@@ -20,3 +20,14 @@
   stroke-dasharray: 2091;
   animation: sign 20s ease-out, fillin 3s ease-in;
 }
+
+.qualitycontainer {
+  background: url(../../resources/Done.gif) repeat-x #20568f;
+  background-size: contain;
+}
+
+@media screen and (max-width: 930px) {
+  .qualitycontainer {
+    background-size: cover;
+  }
+}

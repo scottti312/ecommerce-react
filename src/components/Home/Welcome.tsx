@@ -1,5 +1,5 @@
 import styled from "styled-components/macro";
-import "./welcomestyle.css";
+import "./homestyle.css";
 
 const Welcome = () => {
   return (
