@@ -1,6 +1,5 @@
 # sticker-avenue
-My work in progress ecommerce website. Visit the deployed site here: https://scottti312.github.io/sticker-avenue/ (Working on mobile respnsive design)
-
+My work in progress ecommerce website. Visit the deployed site here: https://stickeravenue-43a99.web.app/ (Mobile compatible!)
 ## Technologies
  - React
  - React Router
