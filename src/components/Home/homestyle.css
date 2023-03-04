@@ -9,7 +9,7 @@
 
 @keyframes fillin {
   from {
-    fill: white;
+    fill: transparent;
   }
   to {
     fill: black;
