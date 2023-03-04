@@ -9,3 +9,7 @@ My work in progress ecommerce website. Visit the deployed site here: https://sco
  - Typescript
  - [styled-components](https://styled-components.com/)
  - Firebase Auth/Firestore
+
+## Tools for some assets
+ - Gimp (Starry background)
+ - Blender (3D model of stickers)
