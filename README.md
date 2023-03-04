@@ -5,6 +5,7 @@ My work in progress ecommerce website. Visit the deployed site here: https://sco
  - React
  - React Router
  - Redux
+ - [React Three Fiber](https://github.com/pmndrs/react-three-fiber) (three.js)
  - Typescript
  - [styled-components](https://styled-components.com/)
  - Firebase Auth/Firestore
