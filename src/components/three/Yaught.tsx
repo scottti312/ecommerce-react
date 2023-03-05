@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { startTransition, useRef, useState } from 'react'
 import { Canvas, useFrame, useLoader } from '@react-three/fiber'
 import { Mesh } from 'three';
 import * as THREE from 'three';
@@ -20,46 +20,45 @@ function Yaught({ url }: YaughtProps) {
 
   const degToRad = (degrees: number) => (Math.PI / 180) * degrees;
 
-  function CameraHelper() {
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    return <group position={[0,0,1.5]}>
-      <cameraHelper args={[camera]} />
-    </group>
-  }
+  // function CameraHelper() {
+  //   const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  //   return <group position={[0,0,1.5]}>
+  //     <cameraHelper args={[camera]} />
+  //   </group>
+  // }
 
-  function LightHelper() {
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    return <group position={[3,3,8]}>
-      <cameraHelper args={[camera]} />
-    </group>
-  }
+  // function LightHelper() {
+  //   const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  //   return <group position={[3,3,8]}>
+  //     <cameraHelper args={[camera]} />
+  //   </group>
+  // }
 
   // Return the view, these are regular Threejs elements expressed in JSX
   return (
     <CanvasWrapper>
-      <Canvas camera={{ position: [0, 0, 1] }}>
-        <ambientLight intensity={0.3} />
-        <spotLight position={[4, 4, 8]} angle={0.15} penumbra={1} />
-        <pointLight position={[-10, -10, -10]} />
-        <mesh
-          rotation={[Math.PI / 2, 0, 0]}
-          ref={ref}
-          // scale={clicked ? 1.5 : 1}
-          onClick={(event) => click(!clicked)}
-          onPointerOver={(event) => hover(true)}
-          onPointerOut={(event) => hover(false)}>
-          <primitive
-            object={gltf.scene}
-            rotation={[degToRad(180), degToRad(90), degToRad(90)]}
-          />
-          {/* <icosahedronGeometry args={[1, 0]} /> */}
-          {/* <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} /> */}
-        </mesh>
-        {/* <CameraHelper /> */}
-        {/* <LightHelper /> */}
-        <OrbitControls />
-      </Canvas>
-
+        <Canvas camera={{ position: [0, 0, 1] }}>
+          <ambientLight intensity={0.3} />
+          <spotLight position={[4, 4, 8]} angle={0.15} penumbra={1} />
+          <pointLight position={[-10, -10, -10]} />
+          <mesh
+            rotation={[Math.PI / 2, 0, 0]}
+            ref={ref}
+            // scale={clicked ? 1.5 : 1}
+            onClick={(event) => startTransition(() => click(!clicked))}
+            onPointerOver={(event) => startTransition(() => hover(true))}
+            onPointerOut={(event) => startTransition(() => hover(false))}>
+            <primitive
+              object={gltf.scene}
+              rotation={[degToRad(180), degToRad(90), degToRad(90)]}
+            />
+            {/* <icosahedronGeometry args={[1, 0]} /> */}
+            {/* <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} /> */}
+          </mesh>
+          {/* <CameraHelper /> */}
+          {/* <LightHelper /> */}
+          <OrbitControls />
+        </Canvas>
     </CanvasWrapper>
   )
 }
