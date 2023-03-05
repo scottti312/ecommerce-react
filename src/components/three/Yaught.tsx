@@ -36,45 +36,31 @@ function Yaught({ url }: YaughtProps) {
 
   // Return the view, these are regular Threejs elements expressed in JSX
   return (
-    <CanvasWrapper>
-        <Canvas camera={{ position: [0, 0, 1] }}>
-          <ambientLight intensity={0.3} />
-          <spotLight position={[4, 4, 8]} angle={0.15} penumbra={1} />
-          <pointLight position={[-10, -10, -10]} />
-          <mesh
-            rotation={[Math.PI / 2, 0, 0]}
-            ref={ref}
-            // scale={clicked ? 1.5 : 1}
-            onClick={(event) => startTransition(() => click(!clicked))}
-            onPointerOver={(event) => startTransition(() => hover(true))}
-            onPointerOut={(event) => startTransition(() => hover(false))}>
-            <primitive
-              object={gltf.scene}
-              rotation={[degToRad(180), degToRad(90), degToRad(90)]}
-            />
-            {/* <icosahedronGeometry args={[1, 0]} /> */}
-            {/* <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} /> */}
-          </mesh>
-          {/* <CameraHelper /> */}
-          {/* <LightHelper /> */}
-          <OrbitControls />
-        </Canvas>
-    </CanvasWrapper>
+    <Canvas camera={{ position: [0, 0, 1] }}>
+      <ambientLight intensity={0.3} />
+      <spotLight position={[4, 4, 8]} angle={0.15} penumbra={1} />
+      <pointLight position={[-10, -10, -10]} />
+      <mesh
+        rotation={[Math.PI / 2, 0, 0]}
+        ref={ref}
+        // scale={clicked ? 1.5 : 1}
+        onClick={(event) => startTransition(() => click(!clicked))}
+        onPointerOver={(event) => startTransition(() => hover(true))}
+        onPointerOut={(event) => startTransition(() => hover(false))}>
+        <primitive
+          object={gltf.scene}
+          rotation={[degToRad(180), degToRad(90), degToRad(90)]}
+        />
+        {/* <icosahedronGeometry args={[1, 0]} /> */}
+        {/* <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} /> */}
+      </mesh>
+      {/* <CameraHelper /> */}
+      {/* <LightHelper /> */}
+      <OrbitControls />
+    </Canvas>
   )
 }
 
-const CanvasWrapper = styled.div`
-  width: 500px;
-  height: 500px;
-  @media screen and (max-width: 550px) {
-    width: 300px;
-    height: 300px;
-  }
-  border-radius: 35px;
-  background-color: white;
-  box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255),
-    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
-`
 
 
 export default Yaught;

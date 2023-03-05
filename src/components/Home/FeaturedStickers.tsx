@@ -33,11 +33,6 @@ const FeaturedStickers = () => {
           ))}
         </FeaturedWrapper>
       </FeaturedContainer>
-      <CreditContainer>
-        <Credit href="https://www.flaticon.com/free-icons/volunteering" title="Icons Credit - THANK YOU!!">
-          Sticker icons created by Freepik - Flaticon
-        </Credit>
-      </CreditContainer>
     </SectionContainer>
   );
 };
@@ -94,21 +89,5 @@ const FeaturedWrapper = styled.div`
   }
 
 `;
-
-
-const CreditContainer = styled.div`
-  margin: 0 auto;
-  text-align: center;
-`;
-
-const Credit = styled.a`
-  margin: 0;
-  color: inherit;
-  font-size: 0.8em;
-  &:link {
-    text-decoration: none;
-  }
-`;
-
 
 export default FeaturedStickers;

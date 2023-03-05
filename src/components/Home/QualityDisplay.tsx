@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import styled, { css } from "styled-components/macro";
-import { COLORS } from "../../colors";
 import Products from "../../util/Products";
+import "./qualitystyle.css";
 
 const QualityDisplay = () => {
   const { pizza, frappe, egg, taco, nigiri, icecream, watermelon, cherry } = Products;
