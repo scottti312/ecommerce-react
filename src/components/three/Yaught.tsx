@@ -64,8 +64,12 @@ function Yaught({ url }: YaughtProps) {
 }
 
 const CanvasWrapper = styled.div`
-  width: 400px;
-  height: 400px;
+  width: 500px;
+  height: 500px;
+  @media screen and (max-width: 550px) {
+    width: 300px;
+    height: 300px;
+  }
   border-radius: 35px;
   background-color: white;
   box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255),
