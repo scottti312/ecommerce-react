@@ -10,8 +10,6 @@ import StunningShowcase from './StunningShowcase';
 import Footer from '../Footer/Footer';
 
 const Home = () => {
-
-
   return (
     <HomeBody>
       <WelcomeContainer>

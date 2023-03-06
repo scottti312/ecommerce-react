@@ -3,27 +3,8 @@ import styled from "styled-components/macro";
 import Yaught from "../three/Yaught";
 import "./showcasestyle.css";
 import { RoughNotation, RoughNotationGroup } from "react-rough-notation"
-import { StaticReadUsage } from "three";
 
 const StunningShowcase = () => {
-
-  const [show, setShow] = useState(true);
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('showsvg');
-      } else {
-        entry.target.classList.remove('showsvg');
-      }
-    })
-  });
-
-  useEffect(() => {
-    const hiddenElements = document.querySelectorAll('.hiddensvg');
-    hiddenElements.forEach((el) => observer.observe(el));
-  });
-
   return (
     <ShowcaseWrapper>
       <ShowcaseText>
@@ -35,9 +16,6 @@ const StunningShowcase = () => {
           <span>✨   </span>
           <RoughNotation type="underline" strokeWidth={2} order="3" animationDelay={500} animationDuration={800} color="#ffac33">Stylish.{"\n"}</RoughNotation>
         </RoughNotationGroup>
-        {/* 💎   Stunning.{"\n"}
-        🌱   Sustainable.{"\n"}
-        ✨   Stylish.{"\n"} */}
       </ShowcaseText>
       <YaughtWrapper>
         <InteractiveNote>
@@ -45,7 +23,7 @@ const StunningShowcase = () => {
             Interactive!
           </InteractiveText>
           <Doodle2 viewBox="0 0 85 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path className="hiddensvg" id="doodle2" d="M84.1428 1.12604C68.4579 15.0432 48.2728 24.8484 26.7076 22.7737C20.393 22.1662 13.251 19.5041 7.51 16.6647C6.29685 16.0646 5.19832 15.2656 4.08583 14.4969C3.06981 13.7949 4.95423 22.296 5.12047 23.2959C6.89794 33.9863 5.2443 22.4385 4.04146 18.4653C3.10796 15.3818 1.13626 12.2911 0.701068 9.07517C0.350636 6.4856 5.49948 7.02736 7.26614 6.8582C9.08258 6.68426 20.8214 3.77937 19.2507 7.81152C16.4328 15.0458 10.9147 19.889 6.01223 25.5572" stroke="currentColor" strokeWidth="2" strokeLinecap="round"></path>
+            <path id="doodle2" d="M84.1428 1.12604C68.4579 15.0432 48.2728 24.8484 26.7076 22.7737C20.393 22.1662 13.251 19.5041 7.51 16.6647C6.29685 16.0646 5.19832 15.2656 4.08583 14.4969C3.06981 13.7949 4.95423 22.296 5.12047 23.2959C6.89794 33.9863 5.2443 22.4385 4.04146 18.4653C3.10796 15.3818 1.13626 12.2911 0.701068 9.07517C0.350636 6.4856 5.49948 7.02736 7.26614 6.8582C9.08258 6.68426 20.8214 3.77937 19.2507 7.81152C16.4328 15.0458 10.9147 19.889 6.01223 25.5572" stroke="currentColor" strokeWidth="2" strokeLinecap="round"></path>
           </Doodle2>
 
         </InteractiveNote>

@@ -7,12 +7,7 @@
   }
 }
 
-.hiddensvg {
-  opacity: 0;
-}
-
-.showsvg {
-  opacity: 1;
+#doodle2 {
   stroke-dasharray: 165;
   animation: sign2 3s ease-out;
 }
