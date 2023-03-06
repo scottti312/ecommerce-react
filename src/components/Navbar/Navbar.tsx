@@ -140,7 +140,7 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
         <RightNav>
           {size.width > mobileWidth &&
             <>
-              <Link to="/about" style={LinkStyle}>About</Link>
+              {/* <Link to="/about" style={LinkStyle}>About</Link> */}
               <Link to="/products" style={LinkStyle}>Products</Link>
               <CartButtonWrapper onClick={handleCartClick}>
                 <CartButton>Cart</CartButton>
@@ -176,7 +176,7 @@ const Navbar = ({ itemAmount, handleCartClick }: NavbarProps) => {
                     <i className="fa-solid fa-xmark fa-2xl"></i>
                   </CloseButton>
                 </TopBar>
-                <Link to="/about" style={LinkStyle} onClick={handleMenuClose}>About</Link>
+                {/* <Link to="/about" style={LinkStyle} onClick={handleMenuClose}>About</Link> */}
                 <Link to="/products" style={LinkStyle} onClick={handleMenuClose}>Products</Link>
                 <CartButtonWrapper onClick={handleCartClick}>
                   <CartButton>Cart</CartButton>
