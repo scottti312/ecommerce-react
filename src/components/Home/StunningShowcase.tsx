@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components/macro";
 import Yaught from "../three/Yaught";
 import "./showcasestyle.css";
-import { RoughNotation, RoughNotationGroup } from "react-rough-notation";
+import { RoughNotation, RoughNotationGroup } from "react-rough-notation"
 import { StaticReadUsage } from "three";
 
 const StunningShowcase = () => {
@@ -29,11 +29,11 @@ const StunningShowcase = () => {
       <ShowcaseText>
         <RoughNotationGroup show={true}>
           <span>💎   </span>
-          <RoughNotation type="underline" strokeWidth={2} order="1" color="#5dadec">Stunning. {"\n"}</RoughNotation>
+          <RoughNotation type="underline" strokeWidth={2} order="1" animationDelay={500} animationDuration={800} color="#5dadec">Stunning. {"\n"}</RoughNotation>
           <span>🌱   </span>
-          <RoughNotation type="underline" strokeWidth={2} order="2" color="#77b255">Sustainable.{"\n"}</RoughNotation>
+          <RoughNotation type="underline" strokeWidth={2} order="2" animationDelay={500} animationDuration={800} color="#77b255">Sustainable.{"\n"}</RoughNotation>
           <span>✨   </span>
-          <RoughNotation type="underline" strokeWidth={2} order="3" color="#ffac33">Stylish.{"\n"}</RoughNotation>
+          <RoughNotation type="underline" strokeWidth={2} order="3" animationDelay={500} animationDuration={800} color="#ffac33">Stylish.{"\n"}</RoughNotation>
         </RoughNotationGroup>
         {/* 💎   Stunning.{"\n"}
         🌱   Sustainable.{"\n"}
@@ -69,18 +69,6 @@ const ShowcaseWrapper = styled.div`
     padding: 0 0 80px 0;
   }
 `;
-
-const DoodlesContainer = styled.div`
-  display: flex;
-  width: 0;
-`;
-
-const Doodle1 = styled.svg`
-  rotate: 140deg;
-  width: 300px;
-  position: absolute;
-  transform: translateY(250px) ;
-`
 
 const Doodle2 = styled.svg`
   rotate: 180deg;
