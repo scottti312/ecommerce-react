@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect } from 'react';
-import styled from 'styled-components/macro';
+import styled, { keyframes } from 'styled-components/macro';
 import ScrollingText from "./ScrollingText";
 import FeaturedStickers from './FeaturedStickers';
 import { COLORS } from '../../colors';
@@ -55,6 +55,17 @@ const WelcomeWrapper = styled.div`
   }
 `;
 
+const appear = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(20%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
 const WelcomeDescription = styled.p`
   font-size: 1.5em;
   max-width: 1000px;
@@ -63,6 +74,8 @@ const WelcomeDescription = styled.p`
   padding-right: 20px;
   margin-top: 40px;
   line-height: 1.7em;
+
+  animation: ${appear} 0.5s ease-out;
   @media screen and (max-width: 550px) {
     line-height: 1.7em;
     font-size: 1.1em;
