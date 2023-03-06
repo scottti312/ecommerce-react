@@ -6,18 +6,18 @@ import styled from 'styled-components/macro';
 import Home from './components/Home/Home';
 import About from './components/About/About';
 import ProductPage from './components/ProductPage/ProductPage';
-import CartMenu from './components/CartMenu';
+import CartMenu from './components/Cart/CartMenu';
 import Navbar from './components/Navbar/Navbar';
 import ScrollToTop from './util/ScrollToTop';
 import ProductsPage from './components/ProductsPage/ProductsPage';
 import { Product } from './util/Products';
 
-import { addToCart } from './cartSlice';
-import type { RootState } from './store';
+import { addToCart } from './redux/cartSlice';
+import type { RootState } from './redux/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { auth} from './firebase/firebase-config';
-import { loadCart } from './cartSlice';
-import { getCart, sendCart } from './firestore';
+import { loadCart } from './redux/cartSlice';
+import { getCart, sendCart } from './firebase/firestore';
 import Footer from './components/Footer/Footer';
 
 function App() {

@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components/macro";
-import { COLORS } from "../colors";
+import { COLORS } from "../../colors";
 
-import { Product } from "../util/Products";
+import { Product } from "../../util/Products";
 
 import { useDispatch } from 'react-redux';
-import { addToCart, deleteFromCart, removeFromCart } from "../cartSlice";
+import { addToCart, deleteFromCart, removeFromCart } from "../../redux/cartSlice";
 
 interface CartItemProps {
   product: Product;

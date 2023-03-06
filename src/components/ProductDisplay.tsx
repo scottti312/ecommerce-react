@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components/macro";
-import { addToCart } from "../cartSlice";
+import { addToCart } from "../redux/cartSlice";
 import { COLORS } from "../colors";
 
 import { Product } from "../util/Products";

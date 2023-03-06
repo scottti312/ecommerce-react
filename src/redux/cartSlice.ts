@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { Product } from "./util/Products";
+import { Product } from "../util/Products";
 
 export interface ProductInCart {
   product: Product;

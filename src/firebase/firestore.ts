@@ -1,6 +1,6 @@
 import { collection, doc, DocumentReference, getDoc, setDoc } from "firebase/firestore";
-import { auth, firestore } from "./firebase/firebase-config";
-import { ProductInCart } from "./cartSlice";
+import { auth, firestore } from "./firebase-config";
+import { ProductInCart } from "../redux/cartSlice";
 
 export const sendCart = async (cart: ProductInCart[]) => {
   const usersRef = collection(firestore, 'users');

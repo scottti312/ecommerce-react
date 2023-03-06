@@ -17,12 +17,12 @@ import {
 
 import { auth, firestore } from '../../firebase/firebase-config';
 import { useDispatch } from 'react-redux';
-import { addToCart } from '../../cartSlice';
+import { addToCart } from '../../redux/cartSlice';
 import { useSelector } from 'react-redux';
-import { loadCart, ProductInCart } from '../../cartSlice';
+import { loadCart, ProductInCart } from '../../redux/cartSlice';
 import useWindowSize from '../useWindowSize';
 import "./navstyles.css";
-import { RootState } from '../../store';
+import { RootState } from '../../redux/store';
 
 const mobileWidth = 760;
 

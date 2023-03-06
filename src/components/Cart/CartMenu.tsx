@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import styled, { keyframes } from "styled-components/macro";
 
 import CartItem from "./CartItem";
-import { COLORS } from "../colors";
+import { COLORS } from "../../colors";
 
-import type { RootState } from '../store';
+import type { RootState } from '../../redux/store';
 import { useSelector } from "react-redux";
 
 import { getAuth } from "firebase/auth";
@@ -53,7 +53,7 @@ const CartMenu = ({ handleCartClose }: CartMenuProps) => {
         <ItemsWrapper>
           {cart.length === 0 &&
             <EmptyWrapper>
-              <EmptyImage src={require("../resources/stickers/food/pineapple.png")} alt="pineapple"></EmptyImage>
+              <EmptyImage src={require("../../resources/stickers/food/pineapple.png")} alt="pineapple"></EmptyImage>
               <EmptyMessage>Your cart is empty!</EmptyMessage>
             </EmptyWrapper>
           }
