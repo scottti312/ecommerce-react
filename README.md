@@ -12,3 +12,6 @@ Visit the deployed site here: https://stickeravenue-43a99.web.app/ (Mobile compa
 ## Tools for some assets
  - Gimp (Starry background)
  - Blender (3D model of stickers)
+
+## Attribution
+Sticker icons are from [Flaticon](https://www.flaticon.com)
