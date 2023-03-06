@@ -24,7 +24,7 @@ const Home = () => {
       <QualityDisplay />
       <ScrollingText />
       <FeaturedStickers />
-      <Footer />
+      {/* <Footer /> */}
     </HomeBody>
   )
 }

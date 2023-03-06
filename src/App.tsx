@@ -18,6 +18,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { auth} from './firebase/firebase-config';
 import { loadCart } from './cartSlice';
 import { getCart, sendCart } from './firestore';
+import Footer from './components/Footer/Footer';
 
 function App() {
   const [cartOpen, setCartOpen] = useState(false);
@@ -69,6 +70,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/products/:productTitle" element={<ProductPage addToCart={handleAddToCart} />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </>
   )

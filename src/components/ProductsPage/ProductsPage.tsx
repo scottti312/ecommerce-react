@@ -28,7 +28,7 @@ const ProductsPage = () => {
 const ProductsWrapper = styled.div`
   display: grid;
   grid-template-columns: 20% 80%;
-  height: 100vh;
+  height: 100%;
   margin: 0 auto;
   max-width: 2500px;
   @media screen and (max-width: 870px) {
