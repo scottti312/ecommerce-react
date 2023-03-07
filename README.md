@@ -1,5 +1,5 @@
 # sticker-avenue
-Visit the deployed site here: https://stickeravenue-43a99.web.app/ (Mobile compatible!)
+Visit the deployed site here: https://sticker-avenue.web.app/ (Mobile compatible!)
 ## Technologies
  - React
  - React Router
