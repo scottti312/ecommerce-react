@@ -1,7 +1,6 @@
 import { startTransition, useRef, useState } from 'react'
 import { useFrame, useLoader } from '@react-three/fiber'
 import { Mesh } from 'three';
-import { Object3D } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from '@react-three/drei';
 
@@ -9,19 +8,12 @@ interface YaughtProps {
   url: string;
 }
 
-
-type YaughtRefType = {
-  current: Object3D | undefined;
-};
-
 function Yaught({ url }: YaughtProps) {
   const gltf = useLoader(GLTFLoader, url);
   // This reference gives us direct access to the THREE.Mesh object
   const ref = useRef<Mesh>(null)
   // Hold state for hovered and clicked events
   const [clicked, setClicked] = useState(false);
-
-  const yaughtRef: YaughtRefType = useRef();
 
   useFrame(() => {
   if (clicked) return;
