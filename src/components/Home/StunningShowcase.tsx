@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
 import styled from "styled-components/macro";
 import Yaught from "../three/Yaught";
 import "./showcasestyle.css";
 import { RoughNotation, RoughNotationGroup } from "react-rough-notation"
+import { Canvas } from "react-three-fiber";
 
 const StunningShowcase = () => {
   return (
@@ -28,7 +28,12 @@ const StunningShowcase = () => {
 
         </InteractiveNote>
         <CanvasWrapper>
-          <Yaught url={"newfood.gltf"} />
+          <Canvas camera={{ position: [0, 0, 1] }}>
+            <ambientLight intensity={0.3} />
+            <spotLight position={[4, 4, 8]} angle={0.15} penumbra={1} />
+            <pointLight position={[-10, -10, -10]} />
+            <Yaught url={"newfood.gltf"} />
+          </Canvas>
         </CanvasWrapper>
       </YaughtWrapper>
     </ShowcaseWrapper>
